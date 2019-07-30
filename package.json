@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "april <mengen.he@oneroot.io>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "main": "dist/xtar.js",
   "repository": {
     "type": "git",
