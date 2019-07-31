@@ -1,3 +1,4 @@
+import store from './store/index';
 
 import xtarDate from './packages/date/index'
 import xtarPaginator from './packages/paginator/index'
@@ -20,6 +21,10 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
+
+new Vue({
+    store
+})
 
 export default {
     install,

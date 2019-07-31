@@ -8,6 +8,7 @@
       v-model="date"
       :style="{'width':width+'px','height':height+'px','left':left+'px','color':color}"
     />
+    {{G_GET_NUMBER}}
     <img
       src="https://github.com/hesiyuetian/plug-img/blob/master/date.png?raw=true"
       class="icon-calendar"
@@ -118,6 +119,10 @@ Date.prototype.format = function(fmt) {
     return fmt;
 };
 
+import { mapGetters } from "vuex";
+import {
+  G_GET_NUMBER
+} from "../../../store/exchang/types";
 export default {
   name: "XtarDate",
   data() {
@@ -452,7 +457,10 @@ export default {
       //     console.log('error')
       // }
     }
-  }
+  },
+  computed: {
+    ...mapGetters([G_GET_NUMBER])
+  },
 };
 </script>
 <style scoped>
