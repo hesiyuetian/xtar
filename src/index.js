@@ -27,6 +27,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
     install,
+    store,
     xtarDate,
     xtarPaginator,
     xtarSlide
