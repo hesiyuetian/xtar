@@ -12,6 +12,9 @@ const components = [
 ]
 
 const install = function (Vue, opts = {}) {
+    new Vue({
+        store
+    })
     components.forEach(component => {
         Vue.component(component.name, component);
     });
@@ -21,10 +24,6 @@ const install = function (Vue, opts = {}) {
 if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
-
-new Vue({
-    store
-})
 
 export default {
     install,
