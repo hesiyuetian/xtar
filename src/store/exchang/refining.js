@@ -16,7 +16,7 @@ const getters = {
 
 const actions = {
     // 进行游戏数据 
-    [A_SET_NUMBER]({ commit },data) {
+    ["A_SET_NUMBER"]({ commit },data) {
         commit(M_SET_NUMBER,data);
     }
 };

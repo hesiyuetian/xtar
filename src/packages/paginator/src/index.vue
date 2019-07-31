@@ -56,9 +56,9 @@
 
 <script>
 import { mapActions } from "vuex";
-import {
-  A_SET_NUMBER
-} from "../../../store/exchang/types";
+// import {
+//   A_SET_NUMBER
+// } from "../../../store/exchang/types";
 export default {
   name: "XtarPaginator",
   data() {
@@ -120,7 +120,7 @@ export default {
     this.init();
   },
   methods: {
-    ...mapActions([A_SET_NUMBER]),
+    // ...mapActions([A_SET_NUMBER]),
     init() {
       this.setTotalPage();
       this.setMiddlePage();
@@ -147,7 +147,8 @@ export default {
     },
 
     jumpToChangeCurrentPage() {
-      this.A_SET_NUMBER(2)
+      // this.A_SET_NUMBER(2)
+      this.$store.commit('A_SET_NUMBER', 15)
       if (
         this.changeCurrentPage &&
         this.changeCurrentPage > 0 &&
