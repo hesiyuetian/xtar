@@ -1,11 +1,12 @@
 {
   "name": "xtar",
   "description": "A Vue.js project",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "april <mengen.he@oneroot.io>",
   "license": "MIT",
   "private": false,
   "main": "dist/xtar.js",
+  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/hesiyuetian/xtar"

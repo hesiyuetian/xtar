@@ -119,7 +119,7 @@ Date.prototype.format = function(fmt) {
 };
 
 export default {
-  name: "xtarDate",
+  name: "XtarDate",
   data() {
     return {
       date: "",
@@ -456,39 +456,7 @@ export default {
 };
 </script>
 <style scoped>
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-div,
-p,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-form,
-table,
-th,
-td,
-a,
-img,
-span,
-strong,
-var,
-em,
-input,
-textarea,
-select,
-option {
-  margin: 0;
-  padding: 0;
-}
-/*html,body{font-family:"微软雅黑"; font-size: 12px; text-align: left;}*/
+@import url("../../../lib/reset.scss");
 html,
 body {
   font-family: "Microsoft YaHei", "weiruanyahei", Tahoma, SimSun;

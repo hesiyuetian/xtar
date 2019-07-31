@@ -1,0 +1,236 @@
+
+/*=========================Reset_start==========================*/
+body,h1,h2,h3,h4,h5,h6,div,p,dl,dt,dd,ol,ul,li,form,table,th,td,a,img,span,strong,var,em,input,textarea,select,option{margin: 0; padding: 0;}
+html,body{ font-family: "Microsoft YaHei","weiruanyahei",Tahoma,SimSun; font-size: 12px; text-align: left;font-weight: 500}
+ul,ol{list-style: none;}
+img{border: 0;}
+/*input,select,textarea{outline:0;}*/
+textarea{resize:none;}
+table{border-collapse: collapse; border-spacing: 0;}
+th,strong,var,em{font-weight: normal; font-style: normal;}
+a{text-decoration: none;}
+/*a:link,a:visited,a:hover,a:active{text-decoration:none;} */
+/*==========================Reset_End===========================*/
+a{
+  text-decoration: none;
+}
+.f-fl{
+  float: left;
+}
+.f-fr{
+  float: right;
+}
+.f-input{
+	outline: none;
+}
+
+.noselect {
+
+  -webkit-touch-callout: none; /* iOS Safari */
+
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+
+  -khtml-user-select: none; /* Konqueror */
+
+  -moz-user-select: none; /* Firefox */
+
+  -ms-user-select: none; /* Internet Explorer/Edge */
+
+  user-select: none; /* Non-prefixed version, currently  not supported by any browser */
+
+}
+
+// 定义字体相关样式
+.f-tal {
+  text-align: left;
+}
+
+.f-tac {
+  text-align: center;
+}
+
+.f-tar {
+  text-align: right;
+}
+
+.f-fwb {
+  font-weight: bold;
+}
+
+// 居中
+.f-center{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+// 水平居中
+.f-center-x{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%)
+}
+// 垂直居中
+.f-center-y{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+// div禁用点击事件
+.disable{
+  pointer-events: none;
+}
+
+/***********按钮点击清除样式**************/
+button{
+  outline-style: none;
+}
+/********清除浮动**********/
+.qcfd:after{
+  display:block;clear:both;content:"";visibility:hidden;height:0
+}
+
+/********取消缩进**********/
+.f-indent{
+  text-indent: 0;
+}
+
+/********鼠标**********/
+.f-cursor{
+  cursor: pointer;
+}
+
+// ******input边框样式*******/
+.bor{
+  border: 1px solid #d9d9d9;
+}
+.bor:focus{
+  outline:none;
+  border:#87C6F9 1px solid;
+  box-shadow: 0 0 8px rgba(103, 166, 217, 1);
+}
+/************ style reset end *******************/
+
+/*input:focus{*/
+/*border-color:#e8e8e8;*/
+/*}*/
+
+/*******input框设置placeholder颜色、字体大小*********/
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #8c8484; opacity:1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #8c8484;opacity:1;
+}
+
+input:-ms-input-placeholder{
+  color: #8c8484;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+  color: #8c8484;opacity:1;
+}
+
+//*******************盒模型***************
+.border-box{
+  box-sizing: border-box;
+}
+.content-box{
+  box-sizing: content-box;
+}
+
+/************ style reset end *******************/
+
+
+.f-pre {
+  overflow: hidden;
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+// div 禁止点击
+.not-click{
+  pointer-events: none
+}
+
+/******消失******/
+.f-dis{
+  display:none;
+}
+
+//******************文本溢出***************
+
+// ******两行溢出显示省略号*******/
+.els-two{
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2; 
+}
+//*******************文本溢出***************
+.ellipsis{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap; 
+}
+
+/************ style reset end *******************/
+
+
+
+//******************滚动条颜色修改***************
+/* 滚动条的滑轨背景颜色 */
+::-webkit-scrollbar-track {
+  background-color: #272932;
+}
+
+/* 滑块颜色 */
+::-webkit-scrollbar-thumb {
+  background-color: #2d303b;
+} 
+
+/* 滑轨两头的监听按钮颜色 */
+::-webkit-scrollbar-button {
+  background-color: #2d303b;
+}
+
+/* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+::-webkit-scrollbar-corner {
+  background-color: #272932;
+} 
+/* Document scrollbar */
+::-webkit-scrollbar {
+width: 8px;
+height: 10px;
+}
+::-webkit-scrollbar-track {
+box-shadow: inset 0 0 6px #272932;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+border-radius: 10px;
+box-shadow: inset 0 0 6px #2d303b;
+}
+/* Scrollable element */
+.some-element::webkit-scrollbar {
+
+}
+
+
+// 隐藏滚动条 
+.dis-over-auto::-webkit-scrollbar{
+  display: none;
+}
+.dis-over-auto::-moz-scrollbar{
+  display: none;
+}
+.dis-over-auto::-ms-scrollbar{
+  display: none;
+}
+/************ style reset end *******************/

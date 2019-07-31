@@ -2,6 +2,7 @@
 import xtarDate from './packages/date/index'
 import xtarPaginator from './packages/paginator/index'
 import xtarSlide from './packages/slide/index'
+// import './lib/reset.scss'
 
 const components = [
     xtarDate,

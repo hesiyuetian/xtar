@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: "xtarPaginator",
+  name: "XtarPaginator",
   data() {
     let self = this;
     return {

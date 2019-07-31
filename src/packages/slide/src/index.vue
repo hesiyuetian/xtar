@@ -25,7 +25,7 @@
 
 <script>
     export default {
-		name: 'xtarSlide',
+		name: 'XtarSlide',
         data(){
             return {
 				setLang: '',
