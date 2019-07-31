@@ -9,20 +9,21 @@ const state = {
 };
 
 const getters = {
-    ["G_GET_NUMBER"](state) {
+    // 进行游戏数据
+    [G_GET_NUMBER](state) {
         return state.number;
-    }
+    },
 };
 
 const actions = {
     // 进行游戏数据 
-    ["A_SET_NUMBER"]({ commit },data) {
-        commit("M_SET_NUMBER",data);
+    [A_SET_NUMBER]({ commit },data) {
+        commit(M_SET_NUMBER,data);
     }
 };
 
 const mutations = {
-    ["M_SET_NUMBER"](state, data) {
+    [M_SET_NUMBER](state, data) {
         state.number = data;
     }
 };

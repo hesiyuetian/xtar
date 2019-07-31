@@ -8,7 +8,6 @@
       v-model="date"
       :style="{'width':width+'px','height':height+'px','left':left+'px','color':color}"
     />
-    {{G_GET_NUMBER}}
     <img
       src="https://github.com/hesiyuetian/plug-img/blob/master/date.png?raw=true"
       class="icon-calendar"
@@ -48,7 +47,7 @@
           <i  @click='monted("pre")' class='iconfont'>&#xe602;</i>-->
         </div>
         <span v-if="locale === 'en'">{{year}}&nbsp;&nbsp;&nbsp;&nbsp;{{month|changEn}}</span>
-        <span v-else>{{year}} 年 {{month}} 月-{{G_GET_NUMBER}}</span>
+        <span v-else>{{year}} 年 {{month}} 月</span>
         <div class="f-fr">
           <img
             src="https://github.com/hesiyuetian/plug-img/blob/master/right.png?raw=true"
@@ -119,10 +118,6 @@ Date.prototype.format = function(fmt) {
     return fmt;
 };
 
-import { mapGetters } from "vuex";
-// import {
-//   G_GET_NUMBER
-// } from "../../../store/exchang/types";
 export default {
   name: "XtarDate",
   data() {
@@ -459,7 +454,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["G_GET_NUMBER"])
   },
 };
 </script>

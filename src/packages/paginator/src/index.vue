@@ -55,10 +55,7 @@
 
 
 <script>
-import { mapActions } from "vuex";
-// import {
-//   A_SET_NUMBER
-// } from "../../../store/exchang/types";
+import serve from '../../../service/index'
 export default {
   name: "XtarPaginator",
   data() {
@@ -120,7 +117,6 @@ export default {
     this.init();
   },
   methods: {
-    // ...mapActions([A_SET_NUMBER]),
     init() {
       this.setTotalPage();
       this.setMiddlePage();
@@ -147,8 +143,6 @@ export default {
     },
 
     jumpToChangeCurrentPage() {
-      // this.A_SET_NUMBER(2)
-      this.$store.commit('A_SET_NUMBER', 15)
       if (
         this.changeCurrentPage &&
         this.changeCurrentPage > 0 &&
@@ -212,6 +206,12 @@ export default {
         this.$emit("changePageSize", this.changePageSize || 10);
       }, 500);
     }
+  },
+  created(){
+    const success = data => {
+      console.log(data,'data')
+    }
+    serve.coins().then(res => success(res))
   }
 };
 </script>
