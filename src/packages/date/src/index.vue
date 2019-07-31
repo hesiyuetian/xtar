@@ -48,7 +48,7 @@
           <i  @click='monted("pre")' class='iconfont'>&#xe602;</i>-->
         </div>
         <span v-if="locale === 'en'">{{year}}&nbsp;&nbsp;&nbsp;&nbsp;{{month|changEn}}</span>
-        <span v-else>{{year}} 年 {{month}} 月</span>
+        <span v-else>{{year}} 年 {{month}} 月-{{G_GET_NUMBER}}</span>
         <div class="f-fr">
           <img
             src="https://github.com/hesiyuetian/plug-img/blob/master/right.png?raw=true"
@@ -120,9 +120,9 @@ Date.prototype.format = function(fmt) {
 };
 
 import { mapGetters } from "vuex";
-import {
-  G_GET_NUMBER
-} from "../../../store/exchang/types";
+// import {
+//   G_GET_NUMBER
+// } from "../../../store/exchang/types";
 export default {
   name: "XtarDate",
   data() {
@@ -459,7 +459,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([G_GET_NUMBER])
+    ...mapGetters(["G_GET_NUMBER"])
   },
 };
 </script>
