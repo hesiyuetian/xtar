@@ -123,6 +123,8 @@ import { mapGetters } from "vuex";
 import {
   G_GET_NUMBER
 } from "../../../store/exchang/types";
+import { watchPubSub } from '../../../watch/index'
+import stores from '../../../dataStore/index' 
 export default {
   name: "XtarDate",
   data() {
@@ -247,6 +249,13 @@ export default {
     }
   },
   mounted() {
+    watchPubSub.resetData(data =>{
+      console.log(data,'Watch-reset,date组件')
+    })
+    watchPubSub.changeTicker(data => {
+      console.log('接收到tickers:', data)
+      console.log('stores获取到tickers:', stores.ticker)
+    })
     window.onresize = _ => {
       clearTimeout(this.timer);
       this.timer = setTimeout(_ => {

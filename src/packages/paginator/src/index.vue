@@ -1,5 +1,6 @@
 <template>
   <div class="april-paginator-content" v-if="totalRow > 10" :style="{'text-align': textAlign}">
+    <button @click="getticker()">getAPI</button>
     <div class="paginator">
       <div
         class="first-page page"
@@ -59,11 +60,15 @@ import { mapActions } from "vuex";
 import {
   A_SET_NUMBER
 } from "../../../store/exchang/types";
+import { pubSub } from '../../../watch/index'
+import stores from '../../../dataStore/index' 
+import api from '../../../service/index' 
 export default {
   name: "XtarPaginator",
   data() {
     let self = this;
     return {
+      a: 1,
       totalPage: "",
       pageRange: 5,
       middlePages: [],
@@ -118,12 +123,21 @@ export default {
   },
   created() {
     this.init();
+    
   },
   methods: {
     ...mapActions([A_SET_NUMBER]),
     init() {
       this.setTotalPage();
       this.setMiddlePage();
+    },
+
+    getticker(){
+      api.coins().then( res => {
+        console.log(res.data,'res')
+        stores.ticker = res.data;
+        pubSub.changeTicker(res.data)
+      })
     },
 
     setTotalPage() {
@@ -147,7 +161,9 @@ export default {
     },
 
     jumpToChangeCurrentPage() {
-      this.A_SET_NUMBER(2)
+      pubSub.resetData(this.a++)
+      // this.A_SET_NUMBER(2)
+      this.$store.dispatch("A_SET_NUMBER",21)
       if (
         this.changeCurrentPage &&
         this.changeCurrentPage > 0 &&
