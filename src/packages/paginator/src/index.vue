@@ -1,5 +1,8 @@
 <template>
   <div class="april-paginator-content" v-if="totalRow > 10" :style="{'text-align': textAlign}">
+
+    <button @click="test()">test</button>
+
     <div class="paginator">
       <div
         class="first-page page"
@@ -56,6 +59,7 @@
 
 <script>
 import serve from '../../../service/index'
+// import { pubSub } from '../../../watch/index'
 export default {
   name: "XtarPaginator",
   data() {
@@ -115,11 +119,20 @@ export default {
   },
   created() {
     this.init();
+    // const success = data => {
+    //   console.log(data,'data')
+    // }
+    // serve.coins().then(res => success(res))
   },
   methods: {
     init() {
       this.setTotalPage();
       this.setMiddlePage();
+    },
+
+    test(){
+      alert(1212)
+      console.log(1212121)
     },
 
     setTotalPage() {
@@ -206,12 +219,6 @@ export default {
         this.$emit("changePageSize", this.changePageSize || 10);
       }, 500);
     }
-  },
-  created(){
-    const success = data => {
-      console.log(data,'data')
-    }
-    serve.coins().then(res => success(res))
   }
 };
 </script>

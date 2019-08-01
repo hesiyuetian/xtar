@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img @click.native='t()' src="./assets/logo.png">
     {{G_GET_NUMBER}}
-    <xtar-paginator></xtar-paginator>
-    <xtar-date></xtar-date>
+    <!-- <xtar-paginator></xtar-paginator>
+    <xtar-date></xtar-date> -->
   </div>
 </template>
 
@@ -17,6 +17,15 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  created() {
+    console.log(1212)
+    alert(212)
+  },
+  methods: {
+    t(){
+      alert(212)
     }
   },
   computed: {

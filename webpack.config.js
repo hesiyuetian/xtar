@@ -6,7 +6,7 @@ const NODE_ENV = process.env.NODE_ENV
 module.exports = {
   entry: './src/main.js',
   // 修改打包入口
-  entry: NODE_ENV == 'development' ? './src/index.js' : './src/index.js',
+  entry: NODE_ENV == 'development' ? './src/main.js' : './src/index.js',
 
   output: {
     path: path.resolve(__dirname, './dist'),

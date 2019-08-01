@@ -1,98 +1,6 @@
 <template>
-  <div id="april-pc-data-time-s" ref="aprilData" tabindex="2" @focus="infocus()" @blur="inblur()">
-    <input
-      type="text"
-      placeholder="输入日期"
-      readonly
-      disabled
-      v-model="date"
-      :style="{'width':width+'px','height':height+'px','left':left+'px','color':color}"
-    />
-    <img
-      src="https://github.com/hesiyuetian/plug-img/blob/master/date.png?raw=true"
-      class="icon-calendar"
-      alt
-    />
-    <img
-      src="https://github.com/hesiyuetian/plug-img/blob/master/cancel.png?raw=true"
-      class="icon-quxiao"
-      alt
-      @click="cancel"
-    />
-    <!-- <i class='iconfont icon-calendar'>&#xe7d6;</i> 
-    <i class='iconfont icon-quxiao1' @click='cancel'>&#xe631;</i>-->
-    <div
-      class="canlender"
-      id="canlender"
-      v-if="dis"
-      @click.stop="infoc()"
-      :style="{'background':background,'top': height+10 +'px'}"
-    >
-      <div class="pc-data-time-s-g" :style="{'top': iconTop+'px'}"></div>
-      <header class="qcfd">
-        <div class="f-fl">
-          <img
-            src="https://github.com/hesiyuetian/plug-img/blob/master/down.png?raw=true"
-            class="down icon"
-            alt
-            @click="yeared('pre')"
-          />
-          <img
-            src="https://github.com/hesiyuetian/plug-img/blob/master/left.png?raw=true"
-            class="left icon"
-            alt
-            @click="monted('pre')"
-          />
-          <!-- <i @click='yeared("pre")' class='iconfont'>&#xe604;</i>
-          <i  @click='monted("pre")' class='iconfont'>&#xe602;</i>-->
-        </div>
-        <span v-if="locale === 'en'">{{year}}&nbsp;&nbsp;&nbsp;&nbsp;{{month|changEn}}</span>
-        <span v-else>{{year}} 年 {{month}} 月</span>
-        <div class="f-fr">
-          <img
-            src="https://github.com/hesiyuetian/plug-img/blob/master/right.png?raw=true"
-            class="right icon"
-            alt
-            @click="monted('pro')"
-          />
-          <img
-            src="https://github.com/hesiyuetian/plug-img/blob/master/up.png?raw=true"
-            class="up icon"
-            alt
-            @click="yeared('pro')"
-          />
-          <!-- <i  @click='monted("pro")' class='iconfont'>&#xe605;</i>
-          <i @click='yeared("pro")' class='iconfont'>&#xe606;</i>-->
-        </div>
-      </header>
-      <table class="bgtable">
-        <thead>
-          <tr>
-            <!--汉字表头-->
-            <th v-for="(item,index) in daynamearr" :key="index">{{item}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(week,i) in wek" :key="i">
-            <td
-              v-for="(item,ind) in week"
-              :key="ind"
-              v-if="ind < week.length"
-              :class="{'gray': item.prevmonth }"
-              @mouseenter="over(i,ind)"
-              @mouseleave="leave()"
-              @click.stop="setD(item.prevmonth,item.day)"
-            >
-              <span
-                :class="['bgtable-block',(year == defaultYear && month == defaultMonth && defaultDay == item.day && !item.prevmonth) ? 'acts' : null ,
-                         toYear == year && toMonth == month && toDay == item.day && !item.prevmonth ? 'today' : null ,
-                         defaultI == i && defaultInd == ind && !item.prevmonth ? 'hover' : null ]"
-              >{{item.day}}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div>
+    <button @click="abc()">1231231231-{{d}}</button>
   </div>
 </template>
 <script>
@@ -118,10 +26,12 @@ Date.prototype.format = function(fmt) {
     return fmt;
 };
 
+import { watchPubSub } from '../../../watch/index'
 export default {
   name: "XtarDate",
   data() {
     return {
+      d: '1',
       date: "",
       daynamearr: ["日", "一", "二", "三", "四", "五", "六"], //星期天数组
       //本月的本期构成
@@ -242,6 +152,10 @@ export default {
     }
   },
   mounted() {
+    console.log(watchPubSub,'watchPubSub')
+    // watchPubSub.resetData((data) =>{
+    //   console.log(data,'data')
+    // })
     window.onresize = _ => {
       clearTimeout(this.timer);
       this.timer = setTimeout(_ => {
@@ -252,6 +166,10 @@ export default {
   },
 
   methods: {
+    abc(){
+      this.d = 3
+      alert(212312)
+    },
     infocus() {
       this.dis = true;
       this.reset();
@@ -452,9 +370,7 @@ export default {
       //     console.log('error')
       // }
     }
-  },
-  computed: {
-  },
+  }
 };
 </script>
 <style scoped>
