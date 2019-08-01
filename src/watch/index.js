@@ -5,7 +5,7 @@ export const pubSub = {
 
     // 发布 改变交易对，初始化数据
     resetData: data => {
-        PubSub.publish('changePair', data)
+        PubSub.publish('reset', data)
     },
 
     // 发布 深度推送到深度图
@@ -33,7 +33,7 @@ export const pubSub = {
 export const watchPubSub = {
     // 发布事件
     resetData: FN => {
-        PubSub.subscribe('changePair', (msg, data) => {
+        PubSub.subscribe('reset', (msg, data) => {
             FN(data)
         })
     },

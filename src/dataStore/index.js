@@ -1,7 +1,7 @@
 
 let stores = {
     ticker: [],
-    pair: 1,
+    pairs: [],
     number: 2,
 }
 

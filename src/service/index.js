@@ -13,6 +13,8 @@ let meta = {
 }
 
 let api = {};
+
+
 /**
 * 获取所有币种
 */
@@ -32,8 +34,24 @@ api.coins = (data) => {
    }) 
 }
 
+/**
+ * 获取所有交易对
+ */
+api.pairs = (data) => {
+    let config = {
+        url: `${meta.commonAddress}/pairs`,
+        method: "get",
+        params: {}
+    };
 
-
+    return new Promise((resolve,reject)=>{
+        axiosService(config)
+        .then((data) => {
+            resolve(data.data);
+        })
+        .catch()
+    }) 
+}
 
 
 export default api

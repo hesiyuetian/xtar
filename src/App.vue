@@ -1,33 +1,29 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    {{G_GET_NUMBER}}
-    <xtar-paginator></xtar-paginator>
-    <xtar-date></xtar-date>
+    <img src="./assets/logo.png" />
+    <xtar-paginator pair="ETH_USDT"></xtar-paginator>
+    <xtar-date pair="ETH_BTC"></xtar-date>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import {
-  G_GET_NUMBER
-} from "./store/exchang/types";
 export default {
-  name: 'app',
-  data () {
+  name: "app",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+      msg: "Welcome to Your Vue.js App"
+    };
   },
-  computed: {
-    ...mapGetters([G_GET_NUMBER])
+  created() {
+	  	
   },
-}
+  computed: {}
+};
 </script>
 
 <style lang="scss" scoped>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -35,7 +31,8 @@ export default {
   margin-top: 60px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 

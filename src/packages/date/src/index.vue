@@ -119,10 +119,6 @@ Date.prototype.format = function(fmt) {
     return fmt;
 };
 
-import { mapGetters } from "vuex";
-import {
-  G_GET_NUMBER
-} from "../../../store/exchang/types";
 import { watchPubSub } from '../../../watch/index'
 import stores from '../../../dataStore/index' 
 export default {
@@ -158,6 +154,10 @@ export default {
     defaultDate: {
       type: String,
       default: new Date().format("yyyy-MM-dd")
+    },
+    pair: {
+      type: String,
+      default: "ETH_BTC"
     },
     maxDate: {
       type: String,
@@ -248,6 +248,10 @@ export default {
         this.reset();
       }
     }
+  },
+  created() {
+    let pair = window.location.hash.replace('#','')
+    console.log(pair,'pair')
   },
   mounted() {
     watchPubSub.resetData(data =>{
@@ -468,10 +472,7 @@ export default {
       //     console.log('error')
       // }
     }
-  },
-  computed: {
-    ...mapGetters([G_GET_NUMBER])
-  },
+  }
 };
 </script>
 <style scoped>

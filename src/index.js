@@ -1,9 +1,10 @@
-import store from './store/index';
-
 import xtarDate from './packages/date/index'
 import xtarPaginator from './packages/paginator/index'
 import xtarSlide from './packages/slide/index'
 // import './lib/reset.scss'
+
+import api from './service/index'
+import stores from './dataStore/index'
 
 const components = [
     xtarDate,
@@ -12,8 +13,9 @@ const components = [
 ]
 
 const install = function (Vue, opts = {}) {
-    new Vue({
-        store
+    api.pairs().then(res => {
+        console.log('index.js',res.data)
+        stores.pairs = res.data
     })
     components.forEach(component => {
         Vue.component(component.name, component);

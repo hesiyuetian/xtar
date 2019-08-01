@@ -56,10 +56,6 @@
 
 
 <script>
-import { mapActions } from "vuex";
-import {
-  A_SET_NUMBER
-} from "../../../store/exchang/types";
 import { pubSub } from '../../../watch/index'
 import stores from '../../../dataStore/index' 
 import api from '../../../service/index' 
@@ -84,6 +80,10 @@ export default {
     currentPages: {
       type: [Number, String],
       default: 1
+    },
+    pair: {
+      type: String,
+      default: "ETH_BTC"
     },
     pageSize: {
       type: [Number, String],
@@ -126,7 +126,6 @@ export default {
     
   },
   methods: {
-    ...mapActions([A_SET_NUMBER]),
     init() {
       this.setTotalPage();
       this.setMiddlePage();
@@ -162,8 +161,6 @@ export default {
 
     jumpToChangeCurrentPage() {
       pubSub.resetData(this.a++)
-      // this.A_SET_NUMBER(2)
-      this.$store.dispatch("A_SET_NUMBER",21)
       if (
         this.changeCurrentPage &&
         this.changeCurrentPage > 0 &&
@@ -227,7 +224,12 @@ export default {
         this.$emit("changePageSize", this.changePageSize || 10);
       }, 500);
     }
-  }
+  },
+  mounted() {
+    setTimeout(_=>{
+      console.log("get Index.js data", stores.pairs)
+    },1000)
+  },
 };
 </script>
 
