@@ -26,7 +26,6 @@ if( ("onhashchange" in window) && ((typeof document.documentMode==="undefined") 
 function hashChangeFire(){
   let hash = window.location.hash.replace('#','')
   pubSub.resetData(hash)
-  console.log("URL产生了变化")
 }
 
 api.pairs().then(res => {
