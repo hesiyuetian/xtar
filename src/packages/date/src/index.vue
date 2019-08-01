@@ -8,7 +8,7 @@
       v-model="date"
       :style="{'width':width+'px','height':height+'px','left':left+'px','color':color}"
     />
-    {{G_GET_NUMBER}}
+    {{resetd}}
     <img
       src="https://github.com/hesiyuetian/plug-img/blob/master/date.png?raw=true"
       class="icon-calendar"
@@ -129,6 +129,7 @@ export default {
   name: "XtarDate",
   data() {
     return {
+      resetd: '',
       date: "",
       daynamearr: ["日", "一", "二", "三", "四", "五", "六"], //星期天数组
       //本月的本期构成
@@ -250,11 +251,12 @@ export default {
   },
   mounted() {
     watchPubSub.resetData(data =>{
+      this.resetd = data
       console.log(data,'Watch-reset,date组件')
     })
     watchPubSub.changeTicker(data => {
-      console.log('接收到tickers:', data)
-      console.log('stores获取到tickers:', stores.ticker)
+      console.log('date组件-接收到tickers:', data)
+      console.log('date组件-stores获取到tickers:', stores.ticker)
     })
     window.onresize = _ => {
       clearTimeout(this.timer);
