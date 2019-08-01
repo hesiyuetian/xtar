@@ -5,6 +5,7 @@ import xtarSlide from './packages/slide/index'
 
 import api from './service/index'
 import stores from './dataStore/index'
+import { pubSub } from './watch/index'
 
 const components = [
     xtarDate,
