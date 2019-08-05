@@ -1,0 +1,274 @@
+@import './reset.scss';
+@import './variable.scss';
+// @import 'http://at.alicdn.com/t/font_1187610_j4744njmena.css';
+
+$buy_color : #00C3B3;
+$sell_color : #FF6F79;
+$color_blue : #4181FF;
+
+
+.act{
+  opacity: 1 !important;
+  // color: #0085FF;
+  color: $color !important;
+}
+
+.trad-content-right{
+    width: 100%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    background: $background !important;
+    color: $color !important;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: $border-color;
+    .change{
+      padding-right: 7px !important;
+    }
+    .deal-market-box {
+        width: 100%;
+        height: 100%;
+        .deal-market {
+          width: 100%;
+          height: 100%;
+          .deal-market-price {
+            .deal-market-price-title {
+              height: 50px;
+              line-height: 50px;
+              padding: 0 20px 0 14px;
+              .active-fav{
+                width: 66px;
+              }
+              span {
+                margin-top: 15px;
+                width: 54px;
+                display: block;
+                float: left;
+                line-height: 18px;
+                font-size: 14px;
+                cursor: pointer;
+                overflow: hidden;
+                text-align: center;
+                opacity: 0.8;
+                &:nth-last-of-type(1){
+                    margin-right: 0;
+                }
+                .icon_start_left{
+                      float: left;
+                      margin-right: 10px;
+                      font-size: 14px;
+                      margin-top: -1.1px;
+                  }
+              }
+              span:hover{
+                color: #4181ff;
+              }
+              .activated{
+                background: #0085FF;
+                color: #fff !important;
+                border-radius: 4px;
+                opacity: 1;
+              }
+            }
+            .deal-market-price-option {
+              padding: 0 20px;
+              height: 40px;
+              line-height: 40px;
+              position: relative;
+              overflow: hidden;
+              width: 100%;
+              box-sizing: border-box;
+              
+              span.iconfont {
+                position: absolute;
+                left: 15px;
+                font-size: 14px;
+                cursor: pointer;
+                
+                top: -1px;
+              }
+              span.nonal{
+                opacity: .1;
+              }
+              span.nonal:hover{
+                color: $color_blue !important;
+                opacity: .5
+              }
+              span.fav{
+                color: #4181FF !important;
+                opacity: 1;
+              }
+              
+
+              div {
+                float: left;
+                font-size: 12px;
+                height: 40px;
+                line-height: 40px;
+                -moz-user-select:none;/*火狐*/
+                -webkit-user-select:none;/*webkit浏览器*/
+                -ms-user-select:none;/*IE10*/
+                user-select:none;
+
+                label{
+                    position: relative;
+                    i{
+                      position: absolute;
+                      top: -14px;
+                      right: -18px;
+                      // cursor: pointer;
+                      opacity: .3;
+                      font-size: 12px;
+                    }
+                    i:nth-of-type(2){
+                      top: -7px;
+                      right: -18px;
+                    }
+                    img{
+                        height: 5px;
+                        width: 8px;
+                        position: absolute;
+                        top: 3px;
+                        right: -12px;
+                        cursor: pointer;
+                        opacity: .3;
+                    }
+                    img:nth-of-type(2){
+                      top: 10px;
+                      right: -12px;
+                    }
+                }
+                &.trade_tokenName{
+                  width: 35%;
+                  &>div{
+                      position: relative;
+                      height: 32px;
+                      span {
+                          font-size: 12px;
+                          margin-left: 5px;
+                        }
+                  }
+                }
+                &.trade_tokenNames{
+                  text-indent: -5px;
+                }
+  
+                &:nth-of-type(2) {
+                  height: 40px;
+                  line-height: 40px;
+                  opacity: .6;
+                }
+                &:nth-of-type(3) {
+                  float: right;
+                  text-align: right;
+                  padding-right: 15px;
+                  height: 40px;
+                  line-height: 40px;
+                  opacity: 1;
+                }
+                
+              }
+              .icon-light{
+                color: $color_blue;
+              }
+            }
+            .price-option {
+              
+              div {
+                div{
+                  position: relative;
+                  cursor: pointer;
+                  display: block;
+                  width: 80%;
+                  span{
+                    opacity: $opction;
+                  }
+                }
+                .trade_upDown{
+                  width: 100%;
+                }
+                &:nth-of-type(3){
+                    // padding-right: 7px;
+                }
+              }
+            }
+            .trade_marketPrice_box{
+                width: 25%;
+                text-align: right;
+                opacity: 1 !important;
+            }
+            .trad-hourse{
+              width: 40%;
+              box-sizing: border-box;
+              text-align: right;
+            }
+            .deal-market-price-content {
+                    height: 438px;
+                    overflow-y: auto;
+                    padding-left: 5px;
+                    box-sizing: border-box;
+                    width: 332px;
+                .scroll-y{
+                    .symbolListShowData{
+                        height: 32px;
+                        line-height: 32px;
+                            padding-left: 41px;
+                            .up-color{
+                                color: $buy_color;
+                            }
+                            .down-color{
+                                color: $sell_color;
+                            }
+                            div{
+                                height: 32px;
+                                line-height: 32px; 
+                            }
+                    }
+                    .symbolListShowData:hover{
+                        background: rgba(255,255,255,.1);
+                    }
+                    .active-bg{
+                      background: $border-color;
+                    }
+                }
+            }
+
+            &-search{
+                width: 100%;
+                height: 30px;
+                margin-top: 10px;
+                padding: 0 20px;
+                position: relative;
+                input{
+                    width: 250px;
+                    height: 30px;
+                    background: none;
+                    outline: none;
+                    border: none;
+                    color: $color !important;
+                    border-bottom: 1px solid;
+                    border-color: $border-color;
+                    border-radius: 0;
+                    position: relative;
+                    top: -12px;
+                }
+                input:focus{
+                    border-color: $color_blue;
+                    box-shadow: 0 0 0 #67a6d9;
+                }
+                img{
+                    width: 30px;
+                    height: 30px;
+                    margin-left: 8px;
+                    font-size: 20px;
+                    position: absolute;
+                    top: -9px
+                }
+            }
+          }
+        }
+      }
+}

@@ -234,6 +234,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    @import url("../../../lib/theme/reset.scss");
+
 .april-paginator-content {
   width: 100%;
 }

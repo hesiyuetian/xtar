@@ -1,9 +1,5 @@
 
 let stores = {
-    ticker: [],
-    pairs: [],
-    number: 2,
+    ticker: []
 }
-
-
 export default stores

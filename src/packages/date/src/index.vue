@@ -476,7 +476,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url("../../../lib/reset.scss");
+@import url("../../../lib/theme/reset.scss");
 html,
 body {
   font-family: "Microsoft YaHei", "weiruanyahei", Tahoma, SimSun;

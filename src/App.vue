@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png" />
-    <xtar-paginator pair="ETH_USDT"></xtar-paginator>
-    <xtar-date pair="ETH_BTC"></xtar-date>
+    <img @click="comin()" src="./assets/logo.png" />
+    <!-- <xtar-paginator pair="ETH_USDT"></xtar-paginator> -->
+    <!-- <xtar-date pair="ETH_BTC"></xtar-date> -->
+    <xtar-market></xtar-market>
   </div>
 </template>
 
 <script>
+import load from './utils/loading'
+load.reset();
 export default {
   name: "app",
   data() {
@@ -15,13 +18,19 @@ export default {
     };
   },
   created() {
-	  	
+    
   },
-  computed: {}
+  computed: {},
+  methods: {
+    comin(){
+      load.tipSuccessShow("我错了大哥")
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+// @import url("./lib/theme/loading.scss");
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
