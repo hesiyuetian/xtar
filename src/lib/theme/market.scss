@@ -1,6 +1,5 @@
 @import './reset.scss';
 @import './variable.scss';
-// @import 'http://at.alicdn.com/t/font_1187610_j4744njmena.css';
 
 $buy_color : #00C3B3;
 $sell_color : #FF6F79;
@@ -35,6 +34,8 @@ $color_blue : #4181FF;
           width: 100%;
           height: 100%;
           .deal-market-price {
+            width: 100%;
+            height: 100%;
             .deal-market-price-title {
               height: 50px;
               line-height: 50px;
@@ -160,6 +161,7 @@ $color_blue : #4181FF;
                   height: 40px;
                   line-height: 40px;
                   opacity: .6;
+                  text-indent: 7px;
                 }
                 &:nth-of-type(3) {
                   float: right;
@@ -206,16 +208,16 @@ $color_blue : #4181FF;
               text-align: right;
             }
             .deal-market-price-content {
-                    height: 438px;
+                    height: calc(100% - 130px );
                     overflow-y: auto;
                     padding-left: 5px;
                     box-sizing: border-box;
-                    width: 332px;
+                    width: 100%;
                 .scroll-y{
                     .symbolListShowData{
                         height: 32px;
                         line-height: 32px;
-                            padding-left: 41px;
+                            padding-left: 15px;
                             .up-color{
                                 color: $buy_color;
                             }
@@ -259,14 +261,15 @@ $color_blue : #4181FF;
                     border-color: $color_blue;
                     box-shadow: 0 0 0 #67a6d9;
                 }
-                img{
-                    width: 30px;
-                    height: 30px;
-                    margin-left: 8px;
-                    font-size: 20px;
-                    position: absolute;
-                    top: -9px
-                }
+                .search{
+                  width: 30px;
+                  height: 30px;
+                  margin-left: 8px;
+                  font-size: 20px;
+                  position: absolute;
+                  top: -9px;
+                  right: 17px;
+              }
             }
           }
         }

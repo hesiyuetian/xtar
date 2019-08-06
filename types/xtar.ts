@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import { XtarComponent } from './component'
 
-import { XtarDate } from './date'
 import { XtarPaginator } from './paginator'
-import { XtarSlide } from './slide'
+import { XtarLoad } from './load'
+import { XtarNoData } from './nodata'
+import { XtarMarket } from './market'
+import { XtarOrderList } from './orderlist'
 
 
 /** The version of element-ui */
@@ -12,7 +14,7 @@ import { XtarSlide } from './slide'
 /**
  * Install all element-ui components into Vue.
  * Please do not invoke this method directly.
- * Call `Vue.use(ElementUI)` to install.
+ * Call `Vue.use(xtar)` to install.
  */
 // export function install (vue: typeof Vue, options: {}): void
 
@@ -28,19 +30,25 @@ import { XtarSlide } from './slide'
   /**
    * Install all element-ui components into Vue.
    * Please do not invoke this method directly.
-   * Call `Vue.use(ElementUI)` to install.
+   * Call `Vue.use(xtar)` to install.
    */
 // export function install (vue: typeof Vue, options: InstallationOptions): void
 export const install = function (vue: typeof Vue, opts = {}) {};
 
-/** ElementUI component common definition */
+/** xtar component common definition */
 export type Component = XtarComponent
 
-/** Alert Component */
-export class Date extends XtarDate {}
-
-/** Aside Component */
+/** Paginator Component */
 export class Paginator extends XtarPaginator {}
 
-/** Autocomplete Component */
-export class Slide extends XtarSlide {}
+/** Load Component */
+export class Load extends XtarLoad {}
+
+/** NoData Component */
+export class NoData extends XtarNoData {}
+
+/** Market Component */
+export class Market extends XtarMarket {}
+
+/** OrderList Component */
+export class OrderList extends XtarOrderList {}

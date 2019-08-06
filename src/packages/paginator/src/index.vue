@@ -58,7 +58,6 @@
 <script>
 import { pubSub } from '../../../watch/index'
 import stores from '../../../dataStore/index' 
-import api from '../../../service/index' 
 export default {
   name: "XtarPaginator",
   data() {
@@ -132,11 +131,11 @@ export default {
     },
 
     getticker(){
-      api.coins().then( res => {
-        console.log(res.data,'res')
-        stores.ticker = res.data;
-        pubSub.changeTicker(res.data)
-      })
+      // api.coins().then( res => {
+      //   console.log(res.data,'res')
+      //   stores.ticker = res.data;
+      //   pubSub.changeTicker(res.data)
+      // })
     },
 
     setTotalPage() {

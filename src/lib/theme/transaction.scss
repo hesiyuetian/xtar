@@ -1,1 +1,276 @@
-@import './reset';
+@import './reset.scss';
+@import './variable.scss';
+
+$buy_bg : rgba(0,195,179,1);
+$sell_bg : rgba(255,111,121,1);
+
+.sell-buy-left{
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    color: $color !important;
+    &-con{
+        width: 100%;
+        height: 100%;
+        &-item{
+            width: calc(50% - 5px);
+            height: 284px;
+            margin: 0 10px 0 0;
+            background: $background !important;
+            border: 1px solid;
+            border-color: $border-color;
+            border-radius: 4px;
+            overflow: hidden;
+            &-blance{
+                font-size: 12px;
+                box-sizing: border-box;
+                line-height: 50px;
+                margin: 0 0 22px 0;
+                border-bottom: 1px solid;
+                border-color: $border-color;
+                text-indent: 20px;
+                &-item{
+                    font-size: 16px;
+                    font-weight: 800;
+                }
+                .balance{
+                    font-weight: 800;
+                    span{
+                        margin: 0;
+                        opacity: $opction !important;
+                        font-weight: 600;
+                        margin-right: 8px;
+                    }
+                    span:nth-of-type(2){
+                        margin: 0 20px 0 8px; 
+                    }
+                }
+                
+            }
+            &-model-tile{
+                height: 38px;
+                display: flex;
+                flex-direction: inherit;
+                line-height: 38px;
+                text-align: center;
+                margin-bottom: 14px;
+                div{
+                    flex: 1;
+                    border-bottom: 2px solid;
+                    border-color: rgba($color: #fff, $alpha: 0);
+                    opacity: 0.3;
+                    cursor: pointer;
+                }
+                div:hover{
+                    opacity: .8;
+                }
+                .act{
+                    border-color: rgba($color: #4181FF, $alpha: 1);
+                    opacity: 1;
+                }
+            }
+            &-price{
+                width: 100%;
+                height: 30px;
+                position: relative;
+                margin-top: 5px;
+                text-indent: 20px;
+                &-title{
+                    width: 54px;
+                    font-size: 12px;
+                    line-height: 30px;
+                    float: left;
+                    opacity: $opction;
+                    margin-left: 20px;
+                    text-align: left;
+                    text-indent: 0;
+                }
+                input{
+                    width: calc(100% - 119px);
+                    height: 30px;
+                    float: left;
+                    background: none;
+                    border: none;
+                    outline: none !important;
+                    border-bottom: 2px solid;
+                    border-color: $border-color;
+                    overflow: hidden;
+                    opacity: .8;
+                    border-radius: 0;
+                    text-indent: 0px;
+                    color: $color !important;
+                }
+                input:focus{
+                    border-color: $color_blue;
+                    box-shadow: 0 0 0px #67a6d9;
+                }
+                .fail{
+                    border-color: $sell_bg !important;
+                }
+                &-symbol{
+                    position: absolute;
+                    right: 20px;
+                    top: 7px;
+                    font-size: 12px;
+                    opacity: $opction;
+                }
+                &-tip{
+                    position: absolute;
+                    top: 39px;
+                    left: 73px;
+                    background: $color !important;
+                    color: $color-d !important;
+                    line-height: 30px;
+                    padding: 0 20px;
+                    border-radius: 4px;
+                    text-indent: 0;
+                    span{
+                        width: 8px;
+                        height: 8px;
+                        display: inline-block;
+                        position: absolute;
+                        top: -3px;
+                        left: 10px;
+                        background: $color !important;
+                        transform: rotate(45deg)
+                    }
+                }
+            }
+            &-prices{
+                margin-top: 18px;
+            }
+            
+            .model-prices{
+                .sell-buy-left-con-item-price-title{
+                    margin-left: 10px;
+                }
+            }
+            &-pricet{
+                height: 40px;
+                line-height: 40px;
+                font-size: 12px;
+            }
+            &-usemoney{
+                height: 12px;
+                line-height: 12px;
+                font-size: 12px;
+                text-align: right;
+                margin-top: 22px;
+                padding-right: 20px;
+                opacity: 1;
+            }
+            .buy{
+                color: $buy_bg;
+            }
+            .sell{
+                color: $sell_bg;
+            }
+            &-relx{
+                height: 32px;
+                line-height: 32px;
+                margin: 31px 0 14px;
+                font-size: 12px;
+                text-indent: 20px;
+                &-item{
+                    display: inline-block;
+                    width: 50px;
+                    height: 16px;
+                    text-align: center;
+                    line-height: 16px;
+                    font-size: 12px;
+                    border-radius: 4px;
+                    margin-right: 6px;
+                    cursor: pointer;
+                    text-indent: 0;
+                    background: $border-flexBtn-color;
+                    color: rgba(255,255,255,1) !important;
+                }
+                &-item:hover{
+                    background: $buy_bg;
+                }
+            }
+            .model-relx{
+                text-indent: 10px;
+                margin: 14px 0 14px;
+                height: 16px;
+                line-height: 16px;
+                .sell-buy-left-con-item-relx-item{
+                    width: 32px;
+                }
+            }
+            .sell-relx{
+                .sell-buy-left-con-item-relx-item:hover{
+                    background: $sell_bg;
+                }
+            }
+            &-money{
+                display: inline-block;
+                font-size: 12px;
+                height: 16px;  
+                line-height: 16px;
+                margin: 6px 20px 0 0;
+            }
+            &-btn{
+                width: calc(100% - 40px);
+                height: 40px;
+                font-size: 14px;
+                font-weight: bold;
+                border: none;
+                text-align: center;
+                line-height: 40px;
+                padding: 0;
+                border-radius: 4px;
+                cursor: pointer;
+                background: $buy_bg;
+                color: #fff !important;
+                font-weight: 800;
+                margin-left: 20px;
+            }
+
+            &-btn:hover{
+                background: #00A698;
+            }
+            .login{
+                background: #4181FF !important;
+            }
+            .sell-btn{
+                background: $sell_bg;
+            }
+            .sell-btn:hover{
+                background: #E85B65;
+            }
+        }
+        &-item:nth-of-type(2){
+            margin: 0;
+        }
+    }
+    
+    .model{
+        .model-prices-t{
+            margin-top: 16px;
+        }
+        .sell-buy-left-con-item-balance{
+            line-height: 17px;
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+            margin-bottom: 7px;
+            .balances{
+                margin-right: 10px;
+            }
+        }
+        
+        .sell-buy-left-con-item{
+            width: 100%;
+            height: 100%;
+            &-money{
+                margin-top: 0;
+            }
+            &-btn{
+                width: calc(100% - 20px);
+                margin-left: 10px;
+            }
+        }
+    }
+  }

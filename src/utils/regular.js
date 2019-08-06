@@ -3,6 +3,14 @@ import load from './loading'
 load.reset();
 
 function regular() {
+    this.sensitiveCheck = str => {
+        if(!str) return ''
+        
+        let sensitiveReg = /^(\w{4})(\w*)(\w{4})$/;
+        return (str.toString()).replace(sensitiveReg, function(a, b, c, d) {
+            return b + (c.replace(/\w/g, ".")).substring(0, 5) + d;
+        });
+    }
     // 千分位分割
     this.numFormat = val => {
         var v, j, sj, rv = "";

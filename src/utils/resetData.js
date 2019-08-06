@@ -1,8 +1,10 @@
 import service from './service';
-import { regular } from './regular';
-import stores from '../dataStore';
+import regular from './regular';
 import { pubSub } from '../watch/index'
 function resetData(){
+    // 行情列表(需要一直维护)
+    this.ticker = [];
+
     this.pairsList = [];
     this.coinsList = [];
     this.inits = () => {
@@ -59,31 +61,37 @@ function resetData(){
         })
     }
 
-    // 获取ticker数据
-    this.getTicker = () => {
+    // 整合ticker
+    this.resetTicker = () => {
         return new Promise((resolve,reject) => {
-            service.getTickers().then( res =>{
-                if(res.status === 0) resolve(res.data)
-                else throw('xtar plugs GET tickers is error')
+            this.getPairs().then(res => {
+                service.getTickers().then( data =>{
+                    if(data.status === 0) {
+                        let result = data.data
+                        for(let item of res){
+                            const Index = result.findIndex(ele => {
+                                return ele.pair === item.pair
+                            })
+                            if(Index != -1 ) result[Index] = {...result[Index], ...item}
+                        }
+                        
+                        this.ticker = result;
+                        resolve(result)
+                    }
+                    else this.ticker = []
+                })
             })
         })
     }
-    this.resetTicker = async () => {
-        const pairsList = await this.getPairs();
-        const ticker = await this.getTicker();
-        for(let item of pairsList){
-            const Index = ticker.findIndex(ele => {
-                return ele.pair === item.pair
-            })
-            if(Index != -1 ) ticker[Index] = {...ticker[Index], ...item}
+    
+    // 获取整合后的ticker
+    this.getTicker = async () => {
+        if(this.ticker.length > 0){
+            return this.ticker;
+        }else{
+            return this.resetTicker()
         }
-        stores.ticker = ticker;
-        pubSub.resetData()
     }
-
-
-
-
 
 
     /**

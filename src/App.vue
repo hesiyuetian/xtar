@@ -1,9 +1,15 @@
 <template>
   <div id="app">
-    <img @click="comin()" src="./assets/logo.png" />
-    <!-- <xtar-paginator pair="ETH_USDT"></xtar-paginator> -->
-    <!-- <xtar-date pair="ETH_BTC"></xtar-date> -->
-    <xtar-market></xtar-market>
+    <div class='kline'>
+      <xtar-order-list></xtar-order-list>
+    </div>
+    <div class='symbole'>
+      <xtar-market></xtar-market>
+    </div>
+    
+    <div class='kline'></div>
+    <div class='kline'></div>
+    <div class='kline'></div>
   </div>
 </template>
 
@@ -30,32 +36,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import url("./lib/theme/loading.scss");
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+#app{
+  width: 100%;
+  height: 100%;
+  .symbole{
+    width: 300px;
+    height: 500px;
+  }
 }
 </style>

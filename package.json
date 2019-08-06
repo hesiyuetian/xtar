@@ -1,7 +1,7 @@
 {
   "name": "xtar",
   "description": "A Vue.js project",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "author": "april <mengen.he@oneroot.io>",
   "license": "MIT",
   "private": false,
@@ -28,7 +28,7 @@
     "style-loader": "^0.23.1",
     "vue": "^2.5.11",
     "vue-style-loader": "^4.1.2",
-    "xtar-ts-sdk": "git+http://10.0.151.200/kitvv/xtar-ts-sdk#v0.2.9.1"
+    "xtar-ts-sdk": "git+http://10.0.151.200/kitvv/xtar-ts-sdk#v0.3.0"
   },
   "browserslist": [
     "> 1%",

@@ -6086,9 +6086,9 @@ ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-"xtar-ts-sdk@git+http://10.0.151.200/kitvv/xtar-ts-sdk#v0.2.9.1":
-  version "0.2.9"
-  resolved "git+http://10.0.151.200/kitvv/xtar-ts-sdk#7804e446fbf4e0552334cabd6010036c2e933ee2"
+"xtar-ts-sdk@git+http://10.0.151.200/kitvv/xtar-ts-sdk#v0.3.0":
+  version "0.3.0"
+  resolved "git+http://10.0.151.200/kitvv/xtar-ts-sdk#9de6fb893509a19136bd560360a8dac080ce5eab"
   dependencies:
     axios "^0.19.0"
     base-58 "0.0.1"

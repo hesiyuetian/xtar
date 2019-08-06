@@ -72,7 +72,7 @@ export const User = {
     },
 
     logout: () => {
-        Userreload();
+        // User.reload();
         const user = ['account', 'user_login_keystore', 'publicKey', 'account_sig'];
         for(let item of user){
             window.localStorage.removeItem(item);

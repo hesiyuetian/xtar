@@ -2,14 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import './lib/theme/iconfont/iconfont.css'
 
-import { pubSub } from './watch/index'
 
-
-import xtarDate from './packages/date/index'
-import xtarPaginator from './packages/paginator/index'
-import xtarSlide from './packages/slide/index'
+// base
+import xtarLoad from './packages/base/load/index'
+import xtarNoData from './packages/base/noData/index'
 
 import xtarMarket from './packages/market/index'
+import xtarOrderList from './packages/orderList/index'
 // import xtarSlide from './packages/depth/index'
 // import xtarSlide from './packages/kLine/index'
 // import xtarSlide from './packages/newTrade/index'
@@ -20,11 +19,12 @@ import reset from './utils/resetData'
 reset.resetTicker();
 
 const components = [
-    xtarDate,
-    xtarPaginator,
-    xtarSlide,
 
-    xtarMarket
+    xtarLoad,
+    xtarNoData,
+
+    xtarMarket,
+    xtarOrderList
 ]
 
 components.forEach(component => {
