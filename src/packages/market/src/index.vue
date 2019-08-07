@@ -127,6 +127,7 @@ import { User } from "../../../utils/user";
 import stores from "../../../dataStore/index";
 import load from "../../../utils/loading";
 import reset from "../../../utils/resetData";
+import xtarUtil from "../../../utils/xtarUtil";
 
 export default {
   name: "XtarMarket",
@@ -164,7 +165,8 @@ export default {
   },
   filters: {},
   mounted() {
-    this.init()
+    this.init();
+    xtarUtil.load();
   },
   methods: {
     init() {

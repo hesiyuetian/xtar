@@ -27,8 +27,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "vue": "^2.5.11",
-    "vue-style-loader": "^4.1.2",
-    "xtar-ts-sdk": "git+http://10.0.151.200/kitvv/xtar-ts-sdk#v0.3.0"
+    "vue-style-loader": "^4.1.2"
   },
   "browserslist": [
     "> 1%",

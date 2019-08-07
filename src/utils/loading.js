@@ -26,7 +26,7 @@ function Loadings(){
         //             </div>
         //            </div>`;
         let DOM = `<div class="loadings">
-                        <img class='loadings-loading f-center' src="../../../assets/images/loading_apng.png" alt="">
+                        <img class='loadings-loading f-center' src="https://beta.lyra.site/assets/images/loading_apng.png" alt="">
                    </div>`;
         let popups = document.createElement('div');
         popups.className = 'popups';
