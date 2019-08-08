@@ -7,7 +7,7 @@ $sell_color : #FF6F79;
 .trad-content{
     width: 100%;
     height: 100%;
-    
+    font-size: 12px;
     .blue{
         color: $buy_color;
     }
@@ -23,7 +23,7 @@ $sell_color : #FF6F79;
         position: relative;
         // width: 100%;
         width: calc( 100% + 10px);
-        height: 100%;
+        height: calc( 100% - 50px);
     }
     &-left{
         width: 100%;
@@ -72,7 +72,6 @@ $sell_color : #FF6F79;
                 opacity: .8;
             }
             .act{
-                // color: $color_blue;
                 border-bottom: 2px solid;
                 border-color: $color_blue;
                 opacity: .8;
@@ -92,7 +91,7 @@ $sell_color : #FF6F79;
             }
             .icon_start{
                 position: absolute;
-                right: 50px;
+                right: 36px;
                 span{
                     margin-right: 20px;
                     font-weight: 600;
@@ -156,7 +155,7 @@ $sell_color : #FF6F79;
     }
     #k-line{
         width: 100%;
-        height: 454px;
+        height: calc( 100% - 68px );
         position: relative;
         top: 7px;
         img{
@@ -170,40 +169,40 @@ $sell_color : #FF6F79;
             opacity: .1;
         }
     }
-    .model{
-        width: calc( 100% - 10px );
-        padding-left: 10px;
-        height: calc( 100% - 50px);
-        .trad-content-left-headBorderBottomLine{
-            top: 39px;
-            right: -12px;
-        }
-        &-icon{
-            position: absolute;
-            width: 9px;
-            height: 100%;
-            cursor: pointer;
-            i{
-                position: absolute;
-                top: 49%;
-                left: -8px;
-                color: $color !important;
-                opacity: .3;
-            }
-        }
-        &-left{
-            left: 0;
-        }
-        &-right{
-            right: 0;
-        }
-        #k-line{
-            height: 100%;
-            border-left: 1px solid;
-            // border-right: 1px solid;
-            border-color: $border-color;
-        }
-    }
+    // .model{
+    //     width: calc( 100% - 10px );
+    //     padding-left: 10px;
+    //     height: calc( 100% - 50px);
+    //     .trad-content-left-headBorderBottomLine{
+    //         top: 39px;
+    //         right: -12px;
+    //     }
+    //     &-icon{
+    //         position: absolute;
+    //         width: 9px;
+    //         height: 100%;
+    //         cursor: pointer;
+    //         i{
+    //             position: absolute;
+    //             top: 49%;
+    //             left: -8px;
+    //             color: $color !important;
+    //             opacity: .3;
+    //         }
+    //     }
+    //     &-left{
+    //         left: 0;
+    //     }
+    //     &-right{
+    //         right: 0;
+    //     }
+    //     #k-line{
+    //         height: 100%;
+    //         border-left: 1px solid;
+    //         // border-right: 1px solid;
+    //         border-color: $border-color;
+    //     }
+    // }
     #container{
         position: relative;
     }

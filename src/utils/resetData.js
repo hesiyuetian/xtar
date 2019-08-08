@@ -6,8 +6,12 @@ function resetData(){
     this.ticker = [];
     this.tickerFlag = false;
 
+    // depth数据
+    this.depthList = [];
+
+    // pair
     this.pairsList = [];
-    this.coinsList = [];
+
     this.inits = () => {
         Promise.all([this.pairs(),this.coins()])
     }
@@ -26,6 +30,7 @@ function resetData(){
         })
         
     }
+
     this.getPairs = () => {
         let pairs = this.pairsList;
         return new Promise((resolve,reject) => {
@@ -34,31 +39,6 @@ function resetData(){
                     resolve(res);
                 });
             }else resolve(pairs)
-        })
-    }
-
-    /**
-     * 获取所有币种
-     */
-    this.coins = () => {
-        return new Promise((resolve,reject) => {
-            service.coins().then((res) => {
-                if(res.status === 0){
-                    resolve(res.data);
-                    this.coinsList = res.data;
-                }
-            })
-        })
-    }
-    
-    this.getCoins = () => {
-        let coins = this.coinsList;
-        return new Promise((resolve,reject) => {
-            if(coins.length < 1){
-                this.coins().then( res => {
-                    resolve(res);
-                });
-            }else resolve(coins)
         })
     }
 

@@ -51,7 +51,7 @@ export default {
   width: 100%;
   height: 100%;
   .kline{
-    width: 800px;
+    width: 1000px;
     height: 800px;
   }
   .symbole{

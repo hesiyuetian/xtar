@@ -251,7 +251,6 @@ export default {
 
         // 深度合并list选择  key, val?
         changeDepth(key, val) {
-            console.log(this.$refs)
             if(this.$refs.xtarDepthSel) this.$refs.xtarDepthSel.blur();
             if (val) {
                 this.depthVal = val;
@@ -308,7 +307,7 @@ export default {
                         })
                     }
 
-
+                    // this.reset.depthList = this.deptList;
                     // this.scoket.setDepth(this.deptList)
                     this.scrollBuyBottom()
                 } else {

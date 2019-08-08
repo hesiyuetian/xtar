@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './lib/theme/iconfont/iconfont.css'
-
+import 'jquery';
 
 // base
 import xtarLoad from './packages/base/load/index'

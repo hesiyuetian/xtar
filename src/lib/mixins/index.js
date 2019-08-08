@@ -112,7 +112,7 @@ const getPrecision = {
             this.nowPairInfo = {};
             let pair = window.location.hash.replace('#','')
             reset.getTicker().then( res => {
-                if(!pair) pair = 'ETH_BTC'; 
+                if(!pair) pair = 'BTC_USDT'; 
                 const Index = res.findIndex(ele => {
                     return ele.pair === pair
                 })
