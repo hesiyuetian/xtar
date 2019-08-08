@@ -16,6 +16,7 @@ import reset from './utils/resetData'
 reset.resetTicker();
 
 const components = [
+    xtarPaginator,
     xtarLoad,
     xtarNoData,
 
