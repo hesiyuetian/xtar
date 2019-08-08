@@ -1,3 +1,5 @@
+import 'jquery';
+
 // base
 import xtarPaginator from './packages/paginator/index'
 import xtarLoad from './packages/base/load/index'
@@ -5,19 +7,27 @@ import xtarNoData from './packages/base/noData/index'
 
 import xtarMarket from './packages/market/index'
 import xtarOrderList from './packages/orderList/index'
+import xtarDepth from './packages/depth/index'
+import xtarNewTrade from './packages/newTrade'
+import xtarTransaction from './packages/transaction'
+import xtarKLine from './packages/kLine'
 
 import reset from './utils/resetData'
+reset.resetTicker();
 
 const components = [
-    xtarPaginator,
     xtarLoad,
     xtarNoData,
+
     xtarMarket,
-    xtarOrderList
+    xtarOrderList,
+    xtarDepth,
+    xtarNewTrade,
+    xtarTransaction,
+    xtarKLine
 ]
 
 const install = function (Vue, opts = {}) {
-    reset.resetTicker();
     components.forEach(component => {
         Vue.component(component.name, component);
     });
@@ -34,5 +44,9 @@ export default {
     xtarLoad,
     xtarNoData,
     xtarMarket,
-    xtarOrderList
+    xtarOrderList,
+    xtarDepth,
+    xtarNewTrade,
+    xtarTransaction,
+    xtarKLine
 }

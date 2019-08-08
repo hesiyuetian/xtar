@@ -13,11 +13,6 @@ import xtarDepth from './packages/depth/index'
 import xtarNewTrade from './packages/newTrade'
 import xtarTransaction from './packages/transaction'
 import xtarKLine from './packages/kLine'
-// import xtarSlide from './packages/depth/index'
-// import xtarSlide from './packages/kLine/index'
-// import xtarSlide from './packages/newTrade/index'
-// import xtarSlide from './packages/transaction/index'
-// import xtarSlide from './packages/orderList/index'
 
 import reset from './utils/resetData'
 reset.resetTicker();
