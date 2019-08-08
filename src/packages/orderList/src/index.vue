@@ -204,7 +204,6 @@ export default {
         }
     },
     mounted() {
-        this.init()
     },
     beforeDestroy(){
         clearInterval(this.timer)

@@ -17,7 +17,7 @@ const TEST = {
 }
 
 const BETA = {
-    channel: 'AUZ4d82hCeLhKS6nhvz9gRApKfjJwyVQ8B',
+    channel: 'XemcAUrqxnQK3SB1mETPFqSw49WwZ5r9EL',
     wsUrl: 'wss://beta-wss.lyra.site',
     sdkUrl: 'https://beta-xtar.lyra.site',
     apiUrl: 'https://beta-api.lyra.site',

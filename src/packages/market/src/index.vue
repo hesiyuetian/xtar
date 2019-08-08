@@ -165,8 +165,7 @@ export default {
   },
   filters: {},
   mounted() {
-    this.init();
-    xtarUtil.load();
+    
   },
   methods: {
     init() {

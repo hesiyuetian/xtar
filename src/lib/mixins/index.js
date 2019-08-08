@@ -2,6 +2,7 @@ import { pubSub, watchPubSub} from '../../watch/index'
 import reset from '../../utils/resetData'
 import regular from '../../utils/regular'
 import { User } from '../../utils/user'
+
 const getPrecision = {
     data(){
         return {
@@ -29,9 +30,10 @@ const getPrecision = {
         }
     },
     created() {
-        this.getInit();
+        
     },
     mounted() {
+        this.getInit();
         watchPubSub.resetData(data =>{this.watchReset(data) })
     },
     
@@ -68,6 +70,41 @@ const getPrecision = {
         tradStatus(status) {
             const _status = {1: '等待上链',2: '上链超时',3: '待确认',4: '确认成功',5: '上链失败'};
             return _status[status]
+        },
+
+        // 时间日期
+        format(time,status) {
+            var t = time
+            var commonTime = new Date(t)
+            var y =
+            commonTime.getFullYear() >= 10
+                ? commonTime.getFullYear()
+                : '0' + commonTime.getFullYear()
+            var month =
+            commonTime.getMonth() + 1 >= 10
+                ? commonTime.getMonth() + 1
+                : '0' + (commonTime.getMonth() + 1)
+            var d =
+            commonTime.getDate() >= 10
+                ? commonTime.getDate()
+                : '0' + commonTime.getDate()
+            var h =
+            commonTime.getHours() >= 10
+                ? commonTime.getHours()
+                : '0' + commonTime.getHours()
+            var m =
+            commonTime.getMinutes() >= 10
+                ? commonTime.getMinutes()
+                : '0' + commonTime.getMinutes()
+            var s =
+            commonTime.getSeconds() >= 10
+                ? commonTime.getSeconds()
+                : '0' + commonTime.getSeconds()
+
+            if (status === 1) return h + ':' + m + ':' + s
+            else if (status === 2) return y + '-' + month + '-' + d + ' ' + h + ':' + m
+            else if (status === 3) return y + '-' + month + '-' + d + ' ' + h + ':' + m + ':' + s
+            else if (status === 4) return y + '-' + month + '-' + d
         }
     },
     methods: {
@@ -95,6 +132,9 @@ const getPrecision = {
         // 公用方法定义如下：
         toFixed(number,fixed) {
             return regular.toFixed(number,fixed)
+        },
+        toBigsells(numberAry , fixed){
+            return regular.toBigsells(numberAry,fixed)
         }
 
     },

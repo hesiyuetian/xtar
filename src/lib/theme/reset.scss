@@ -1,236 +1,434 @@
-
+@charset "utf-8";
 /*=========================Reset_start==========================*/
-body,h1,h2,h3,h4,h5,h6,div,p,dl,dt,dd,ol,ul,li,form,table,th,td,a,img,span,strong,var,em,input,textarea,select,option{margin: 0; padding: 0;}
-html,body{ font-family: "Microsoft YaHei","weiruanyahei",Tahoma,SimSun; font-size: 12px; text-align: left;font-weight: 500}
-ul,ol{list-style: none;}
-img{border: 0;}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+table,
+th,
+td,
+a,
+img,
+span,
+strong,
+var,
+em,
+input,
+textarea,
+select,
+option {
+    margin: 0;
+    padding: 0;
+} 
+
+/*html,body{font-family:"微软雅黑"; font-size: 12px; text-align: left;}*/
+
+html,
+body {
+    font-size: 12px;
+    text-align: left;
+    font-weight: 400;
+    font-family: "PingFang SC", "PingFangSC-Regular", "微软雅黑", 'San Francisco Display';
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    border: 0;
+}
+
+
+.max-box{
+    width: 100%;
+    height: 100%;
+}
+
+
+/*************确认按钮******************/
+.f-confirm{
+    background: #4181ff !important;
+}
+.f-confirm:hover{
+    background: #1E5ED9 !important;
+}
+
+/*************语义按钮(detail,cancel,deposit,withdraw)******************/
+.f-semantic-btn {
+    color: #4F6CFF !important;
+}
+.f-semantic-btn:hover{
+    color: #1E5ED9 !important;
+}
+
+
+/*************主题opacity值******************/
+.f-opacity{
+    opacity: .8 !important;
+}
+.f-opacity-c{
+    opacity: .6 !important;
+}
+.f-opacity-t{
+    opacity: .3 !important;
+}
+
+
+
 /*input,select,textarea{outline:0;}*/
-textarea{resize:none;}
-table{border-collapse: collapse; border-spacing: 0;}
-th,strong,var,em{font-weight: normal; font-style: normal;}
-a{text-decoration: none;}
+
+textarea {
+    resize: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,
+strong,
+var,
+em {
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*a:link,a:visited,a:hover,a:active{text-decoration:none;} */
-/*==========================Reset_End===========================*/
-a{
-  text-decoration: none;
-}
-.f-fl{
-  float: left;
-}
-.f-fr{
-  float: right;
-}
-.f-input{
-	outline: none;
-}
 
-.noselect {
-
-  -webkit-touch-callout: none; /* iOS Safari */
-
-  -webkit-user-select: none; /* Chrome/Safari/Opera */
-
-  -khtml-user-select: none; /* Konqueror */
-
-  -moz-user-select: none; /* Firefox */
-
-  -ms-user-select: none; /* Internet Explorer/Edge */
-
-  user-select: none; /* Non-prefixed version, currently  not supported by any browser */
-
-}
-
-// 定义字体相关样式
-.f-tal {
-  text-align: left;
-}
-
-.f-tac {
-  text-align: center;
-}
-
-.f-tar {
-  text-align: right;
-}
-
-.f-fwb {
-  font-weight: bold;
+.dis-none{
+    display: none;
 }
 
 // 居中
 .f-center{
-  position: relative;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 // 水平居中
 .f-center-x{
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%)
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
 }
 // 垂直居中
 .f-center-y{
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%)
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%)
 }
 
 // div禁用点击事件
 .disable{
-  pointer-events: none;
+    pointer-events: none;
+}
+/*==========================Reset_End===========================*/
+
+a {
+    // text-decoration: none;
 }
 
-/***********按钮点击清除样式**************/
-button{
-  outline-style: none;
-}
-/********清除浮动**********/
-.qcfd:after{
-  display:block;clear:both;content:"";visibility:hidden;height:0
+.f-fl {
+    float: left;
 }
 
-/********取消缩进**********/
-.f-indent{
-  text-indent: 0;
+.f-fr {
+    float: right;
 }
 
-/********鼠标**********/
-.f-cursor{
-  cursor: pointer;
+.f-input {
+    outline: none;
 }
 
-// ******input边框样式*******/
-.bor{
-  border: 1px solid #d9d9d9;
-}
-.bor:focus{
-  outline:none;
-  border:#87C6F9 1px solid;
-  box-shadow: 0 0 8px rgba(103, 166, 217, 1);
-}
-/************ style reset end *******************/
-
-/*input:focus{*/
-/*border-color:#e8e8e8;*/
-/*}*/
-
-/*******input框设置placeholder颜色、字体大小*********/
-
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: #8c8484; opacity:1;
-}
-
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: #8c8484;opacity:1;
-}
-
-input:-ms-input-placeholder{
-  color: #8c8484;opacity:1;
-}
-
-input::-webkit-input-placeholder{
-  color: #8c8484;opacity:1;
-}
-
-//*******************盒模型***************
-.border-box{
-  box-sizing: border-box;
-}
-.content-box{
-  box-sizing: content-box;
-}
-
-/************ style reset end *******************/
-
-
-.f-pre {
-  overflow: hidden;
-  text-align: left;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    -khtml-user-select: none;
+    /* Konqueror */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently  not supported by any browser */
 }
 
 // div 禁止点击
 .not-click{
-  pointer-events: none
+    pointer-events: none
 }
 
+// 定义字体相关样式
+.f-tal {
+    text-align: left;
+}
+
+.f-tac {
+    text-align: center;
+}
+
+.f-tar {
+    text-align: right;
+}
+
+.f-fwb {
+    font-weight: bold;
+}
+
+
+
+// 定义字体位置
+.f-text-left{
+    text-align: left !important;
+}
+.f-text-center{
+    text-align: center
+}
+.f-text-right{
+    text-align: right
+}
+
+// 定义字体权重
+.f-fontw1{
+    font-weight: 100 !important;
+}
+.f-fontw2{
+    font-weight: 200 !important;
+}
+.f-fontw3{
+    font-weight: 300 !important;
+}
+.f-fontw4{
+    font-weight: 400 !important;
+}
+.f-fontw5{
+    font-weight: 600 !important;
+}
+.f-fontw6{
+    font-weight: 600 !important;
+}
+.f-fontw7{
+    font-weight: 700 !important;
+}
+.f-fontw8{
+    font-weight: 800 !important;
+}
+
+/***********font************8*/
+.font14{
+    font-size: 14px;
+}
+
+
+/***********按钮点击清除样式**************/
+
+button {
+    outline-style: none;
+}
+
+.href-link{
+    color: #004EFF !important;
+}
+
+
+/********清除浮动**********/
+
+.qcfd:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0
+}
+
+
+/********取消缩进**********/
+
+.f-indent {
+    text-indent: 0;
+}
+
+
+/********鼠标**********/
+
+.f-cursor {
+    cursor: pointer;
+}
+
+.f-cursor-not{
+    cursor: not-allowed;
+}
+
+// ******input边框样式*******/
+.bor {
+    border: 1px solid #d9d9d9;
+}
+
+.bor:focus {
+    outline: none;
+    border:#87C6F9 1px solid;
+    box-shadow: 0 0 12px #2799f5;
+}
+
+div:focus{
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+input {
+    background: none;
+    border: none;
+    outline: none !important;
+}
+
+input:focus {
+    border-width: 2px;
+    border-bottom-color: #4F6CFF;
+    box-shadow: 0 0 0px #67a6d9;
+}
+
+/************ style reset end *******************/
+
+
+/*******input框设置placeholder颜色、字体大小*********/
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color:#121932 !important;
+    opacity: .3;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #121932  !important;
+    opacity: .3;
+}
+
+input:-ms-input-placeholder {
+    color: #121932  !important;
+    opacity: .3;
+}
+
+input::-webkit-input-placeholder {
+    color: #121932  !important;
+    opacity: .3;
+}
+
+
+.border-bottom{
+    border-bottom: 1px solid #000;
+}
+
+//*******************盒模型***************
+.border-box {
+    box-sizing: border-box;
+}
+
+.content-box {
+    box-sizing: content-box;
+}
+
+
+/************ style reset end *******************/
+
+.f-pre {
+    overflow: hidden;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+
 /******消失******/
-.f-dis{
-  display:none;
+
+.f-dis {
+    display: none;
 }
 
 //******************文本溢出***************
-
 // ******两行溢出显示省略号*******/
-.els-two{
-  overflow:hidden; 
-  text-overflow:ellipsis;
-  display:-webkit-box; 
-  -webkit-box-orient:vertical;
-  -webkit-line-clamp:2; 
+.els-two {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
+
 //*******************文本溢出***************
-.ellipsis{
-  overflow : hidden;
-  text-overflow: ellipsis;
-  white-space:nowrap; 
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+.text-underline{
+    text-decoration: underline;
+}
+
 
 /************ style reset end *******************/
-
-
-
-//******************滚动条颜色修改***************
-/* 滚动条的滑轨背景颜色 */
-::-webkit-scrollbar-track {
-  background-color: #272932;
+::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
-/* 滑块颜色 */
-::-webkit-scrollbar-thumb {
-  background-color: #2d303b;
-} 
-
-/* 滑轨两头的监听按钮颜色 */
-::-webkit-scrollbar-button {
-  background-color: #2d303b;
+::-webkit-scrollbar-thumb , ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: rgba(127,143,164,.4);
 }
 
-/* 横向滚动条和纵向滚动条相交处尖角的颜色 */
-::-webkit-scrollbar-corner {
-  background-color: #272932;
-} 
-/* Document scrollbar */
+
 ::-webkit-scrollbar {
-width: 8px;
-height: 10px;
+    width: 5px;
+    height: 5px;
 }
+
+::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
 ::-webkit-scrollbar-track {
-box-shadow: inset 0 0 6px #272932;
-border-radius: 10px;
+    opacity: 0;
+    border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
-border-radius: 10px;
-box-shadow: inset 0 0 6px #2d303b;
-}
-/* Scrollable element */
-.some-element::webkit-scrollbar {
-
+    border-radius: 4px;
 }
 
+.some-element::webkit-scrollbar {}
 
-// 隐藏滚动条 
-.dis-over-auto::-webkit-scrollbar{
-  display: none;
-}
-.dis-over-auto::-moz-scrollbar{
-  display: none;
-}
-.dis-over-auto::-ms-scrollbar{
-  display: none;
-}
 /************ style reset end *******************/
+
+.auth-input:-webkit-autofill {
+    caret-color: #3075ee;
+    border: none;
+    -webkit-box-shadow: 0 0 0 30px rgb(255, 255, 255) inset;
+    -webkit-text-fill-color: #4c5264 !important;
+}

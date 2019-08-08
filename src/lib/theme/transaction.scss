@@ -10,12 +10,13 @@ $sell_bg : rgba(255,111,121,1);
     float: left;
     overflow: hidden;
     color: $color !important;
+    font-size: 12px;
     &-con{
         width: 100%;
         height: 100%;
         &-item{
             width: calc(50% - 5px);
-            height: 284px;
+            height: 285px;
             margin: 0 10px 0 0;
             background: $background !important;
             border: 1px solid;
@@ -49,12 +50,14 @@ $sell_bg : rgba(255,111,121,1);
                 
             }
             &-model-tile{
-                height: 38px;
+                height: 45px;
                 display: flex;
                 flex-direction: inherit;
-                line-height: 38px;
+                line-height: 45px;
                 text-align: center;
                 margin-bottom: 14px;
+                border-bottom: 1px solid;
+                border-color: $border-color;
                 div{
                     flex: 1;
                     border-bottom: 2px solid;
@@ -74,7 +77,8 @@ $sell_bg : rgba(255,111,121,1);
                 width: 100%;
                 height: 30px;
                 position: relative;
-                margin-top: 5px;
+                // margin-top: 5px;  april
+                margin-top: 13px;
                 text-indent: 20px;
                 &-title{
                     width: 54px;
@@ -169,7 +173,7 @@ $sell_bg : rgba(255,111,121,1);
             &-relx{
                 height: 32px;
                 line-height: 32px;
-                margin: 31px 0 14px;
+                margin: 27px 0 14px;
                 font-size: 12px;
                 text-indent: 20px;
                 &-item{
@@ -192,7 +196,7 @@ $sell_bg : rgba(255,111,121,1);
             }
             .model-relx{
                 text-indent: 10px;
-                margin: 14px 0 14px;
+                margin: 18px 0 20px;
                 height: 16px;
                 line-height: 16px;
                 .sell-buy-left-con-item-relx-item{
@@ -248,14 +252,14 @@ $sell_bg : rgba(255,111,121,1);
     
     .model{
         .model-prices-t{
-            margin-top: 16px;
+            margin-top: 22px;
         }
         .sell-buy-left-con-item-balance{
-            line-height: 17px;
+            line-height: 20px;
             width: 100%;
             padding: 0 10px;
             box-sizing: border-box;
-            margin-bottom: 7px;
+            margin-bottom: 9px;
             .balances{
                 margin-right: 10px;
             }
@@ -263,7 +267,7 @@ $sell_bg : rgba(255,111,121,1);
         
         .sell-buy-left-con-item{
             width: 100%;
-            height: 100%;
+            height: 285px;
             &-money{
                 margin-top: 0;
             }

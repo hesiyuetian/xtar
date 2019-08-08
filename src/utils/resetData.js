@@ -4,6 +4,7 @@ import { pubSub } from '../watch/index'
 function resetData(){
     // 行情列表(需要一直维护)
     this.ticker = [];
+    this.tickerFlag = false;
 
     this.pairsList = [];
     this.coinsList = [];
@@ -63,6 +64,7 @@ function resetData(){
 
     // 整合ticker
     this.resetTicker = () => {
+        this.tickerFlag = false;
         return new Promise((resolve,reject) => {
             this.getPairs().then(res => {
                 service.getTickers().then( data =>{
@@ -76,6 +78,7 @@ function resetData(){
                         }
                         
                         this.ticker = result;
+                        this.tickerFlag = true;
                         resolve(result)
                     }
                     else this.ticker = []
@@ -85,12 +88,17 @@ function resetData(){
     }
     
     // 获取整合后的ticker
-    this.getTicker = async () => {
-        if(this.ticker.length > 0){
-            return this.ticker;
-        }else{
-            return this.resetTicker()
-        }
+    this.getTicker = () => {
+        var time = null;
+        return new Promise((resolve,reject) => {
+            if(this.tickerFlag) return resolve(this.ticker)
+            time = setInterval(()=>{
+                if(this.tickerFlag){
+                    clearInterval(time);
+                    resolve(this.ticker)
+                }
+            },500) 
+        })
     }
 
 

@@ -1,6 +1,5 @@
 <template>
   <div class="april-paginator-content" v-if="totalRow > 10" :style="{'text-align': textAlign}">
-    <button @click="getticker()">getAPI</button>
     <div class="paginator">
       <div
         class="first-page page"
@@ -128,14 +127,6 @@ export default {
     init() {
       this.setTotalPage();
       this.setMiddlePage();
-    },
-
-    getticker(){
-      // api.coins().then( res => {
-      //   console.log(res.data,'res')
-      //   stores.ticker = res.data;
-      //   pubSub.changeTicker(res.data)
-      // })
     },
 
     setTotalPage() {
