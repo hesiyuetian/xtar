@@ -6,6 +6,10 @@ import { XtarLoad } from './load'
 import { XtarNoData } from './nodata'
 import { XtarMarket } from './market'
 import { XtarOrderList } from './orderlist'
+import { XtarDepth } from './depth'
+import { XtarKLine } from './kline'
+import { XtarNewTrade } from './newtrade'
+import { XtarTransaction } from './transaction'
 
 
 /** The version of element-ui */
@@ -51,4 +55,18 @@ export class NoData extends XtarNoData {}
 export class Market extends XtarMarket {}
 
 /** OrderList Component */
+export class Depth extends XtarDepth {}
+
+/** OrderList Component */
+export class KLine extends XtarKLine {}
+
+/** OrderList Component */
+export class NewTrade extends XtarNewTrade {}
+
+/** OrderList Component */
 export class OrderList extends XtarOrderList {}
+
+/** OrderList Component */
+export class Transaction extends XtarTransaction {}
+
+
