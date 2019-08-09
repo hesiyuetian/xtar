@@ -168,7 +168,7 @@ export default {
                 
                 container_id: "k-line",
                 datafeed: new Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,3000),
-                library_path: "node_modules/src/lib/trading/",
+                library_path: "src/lib/trading/",
                 locale: User.getItem('language') || "zh", // en
                 // 不显示元素
                 disabled_features: tv.getDisFeatures(),
