@@ -19,6 +19,10 @@
     <div class='new'>
       <xtar-new-trade></xtar-new-trade>
     </div>
+
+    <!-- <div> -->
+      <xtar-unlock></xtar-unlock>
+    <!-- </div> -->
     
   </div>
 </template>

@@ -3,6 +3,56 @@ import load from './loading'
 load.reset();
 
 function regular() {
+    //验证密码强度
+    this.verificationPassword = txt =>{
+        var lvl = 0;
+
+        /[0-9]/.test(txt) && lvl++;
+        /[a-z]/.test(txt) && lvl++;
+        /[A-Z]/.test(txt) && lvl++;
+        /\W/.test(txt) && lvl++;
+        (!!!txt || txt.length < 8) && (lvl = 0);
+
+        return lvl;
+
+        // return zxcvbn(txt).score;
+    }
+    // 密码校验
+    this.pwdPlexCheck = str => {
+        let pwdReg = /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\W_]+$)(?![a-z0-9]+$)(?![a-z\W_]+$)(?![0-9\W_]+$)[a-zA-Z0-9\W_]{8,16}$/;
+        return pwdReg.test( str );
+    }
+    //只能输入数字
+    this.numberEnter = str => {
+        // value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')
+        return str.replace(/[^\.\d]/g,'')
+    }
+    //只能输入小写字母和空格
+    this.stringKong = str => {
+        let v = str.replace(/[^\ \a-z]*$/g,'');
+        return this.delectFirstKong(v);
+    }
+    //多个空格替换为一个空格
+    this.kongGe = str => {
+        var regEx = /\s+/g; 
+        return str.replace(regEx, ' '); 
+    }
+    //去掉第一位空格
+    this.delectFirstKong = str => {
+        return str.replace(/(^\s*)/g, "");
+    }
+    //只能输入整数
+    this.number = str => {
+        return str.replace(/\D/g,'')
+    }
+    //只能输入英文和数字
+    this.stringAndNumber = str => {
+        return str.replace(/[^\w\/]/ig,'');
+    }
+    //只能输入英文， 不限大小写
+    this.stringEnter = str =>{
+        return str.replace(/[^\a-zA-Z]/g,'');
+    }
     this.sensitiveCheck = str => {
         if(!str) return ''
         

@@ -90,16 +90,16 @@ export const User = {
 
     //缓存本地KEY_Store
     addLocalKey: (data) => {
-        let list = UsergetItem(keyStoreName);
+        let list = User.getItem(keyStoreName);
         let arr = [];
         if(list){ 
-            arr = JSON.parse(UsergetItem(keyStoreName)) 
+            arr = JSON.parse(User.getItem(keyStoreName)) 
             arr = arr.filter( ele => {
                 return ele.address != data.address
             })
         }
         arr.push(data);
-        UsersetItem(keyStoreName, JSON.stringify(arr));
+        User.setItem(keyStoreName, JSON.stringify(arr));
     },
 
     //修改密码后替换缓存中的keystore
@@ -107,20 +107,19 @@ export const User = {
         const name = data.name;
         const address = data.address
         const keyStore = data.keyStore;
-        let list = JSON.parse(UsergetItem(keyStoreName));
+        let list = JSON.parse(User.getItem(keyStoreName));
         for(let i of list){
             if((i.name == name)&& (i.address == address)){
                 i.keyStore = keyStore;
                 break;
             }
         }
-        console.log(list)
-        UsersetItem(keyStoreName, JSON.stringify(list));
+        User.setItem(keyStoreName, JSON.stringify(list));
     },
     //储存私钥 + 时间催
     setPriDate: (privateKey) => {
         let pri = privateKey +'-'+ new Date().getTime();
-        UsersetItem('account_sig', secret.encrypt(pri));
+        User.setItem('account_sig', secret.encrypt(pri));
     },
 
     

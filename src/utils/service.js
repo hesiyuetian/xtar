@@ -1,5 +1,6 @@
 import axiosService from './axios';
 import xtar from './xtar'
+import xtarSign from './xtarSign'
 import { CONFIG } from './config'
 import axios from 'axios'
 
@@ -23,7 +24,7 @@ let service = {
         let paramsData = {
             timestamp: time,
             channel: channel,
-            sig: xtar.loginSign(time,data.user,channel)
+            sig: xtarSign.loginSign(time,data.user,channel)
         }
         let config = {
             url: `${api.userAddress}/authorize`,

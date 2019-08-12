@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './lib/theme/iconfont/iconfont.css'
+// import './lib/theme/loading.scss'
 import 'jquery';
 
 // base
@@ -13,6 +13,7 @@ import xtarDepth from './packages/depth/index'
 import xtarNewTrade from './packages/newTrade'
 import xtarTransaction from './packages/transaction'
 import xtarKLine from './packages/kLine'
+import xtarUnlock from './packages/unlock'
 
 import reset from './utils/resetData'
 reset.resetTicker();
@@ -26,7 +27,8 @@ const components = [
     xtarDepth,
     xtarNewTrade,
     xtarTransaction,
-    xtarKLine
+    xtarKLine,
+    xtarUnlock
 ]
 
 components.forEach(component => {

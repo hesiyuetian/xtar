@@ -1,6 +1,6 @@
 .loadings{
     position: fixed;
-    z-index: 9999;
+    z-index: 999999999;
     width: 100%;
     height: 100%;
     top: 0;
@@ -17,11 +17,9 @@
         left: 0;
         right: 0;
         bottom: 0;
-        // background: rgba(0,0,0,0.3);
-        @include mixin-bg-load();
+        background: rgba(0,0,0,.3) !important;
         border-radius: 10px;
-        // color: #fff;
-        @include mixin-color-load();
+        color: #fff !important;
         width: 90px;
         height: 90px;
         text-align: center;
@@ -71,6 +69,82 @@
         background: #FF6F79;
     }
 }
+
+.frame{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999999;
+    background: rgba(0,0,0,0.3);
+    
+    .frame-main{
+        
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        
+    }
+    .alerted{
+        max-width: 60%;
+        line-height: 20px;
+        padding: 20px;
+        background: #fff;
+        position: absolute;
+        top: 90px;
+        left: 20%;
+        word-wrap: break-word;
+        word-break: normal;
+        z-index: 9999;
+        border-radius: 4px;
+    }
+    .frame-box{
+        
+
+    }
+    .tip-main{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        min-width: 300px;
+        min-height: 40px;
+        line-height: 40px;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+
+        display: inline-block;
+        background: #fff;
+        box-shadow: 0 0 10px #ccc;
+       
+        border-radius: 8px;
+    }
+    .tip-icon{
+        display: inline-block;
+        font-size: 14px;
+        color: #ffffff;
+        margin-right: 10px;
+        border-radius: 20px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        line-height: 20px;
+    }
+    .tip-success{
+        background: #52c41a;
+    }
+    .tip-warning{
+        background: #faad14;
+    }
+    .tip-error{
+        background: #f5222d;
+    }
+}
+
 
 @keyframes toBottom{
     0%{top: -100px;}
