@@ -10,6 +10,7 @@ import { XtarDepth } from './depth'
 import { XtarKLine } from './kline'
 import { XtarNewTrade } from './newtrade'
 import { XtarTransaction } from './transaction'
+import { XtarUnlock } from './unlock'
 
 
 /** The version of element-ui */
@@ -68,5 +69,8 @@ export class OrderList extends XtarOrderList {}
 
 /** OrderList Component */
 export class Transaction extends XtarTransaction {}
+
+/** OrderList Component */
+export class Unlock extends XtarUnlock {}
 
 

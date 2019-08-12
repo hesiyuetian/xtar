@@ -1,6 +1,5 @@
 <template>
     <div class="sell-buy-left border-box"> 
-
         <div class='sell-buy-left-con border-box qcfd' :class="{'model': modeSel == 'tile'}">
             <!-- 买入 -->
             <div class='sell-buy-left-con-item border-box f-fl'  v-if="modeSel == 'traditional' || (modeSel == 'tile' && side == 'buy')">
@@ -55,7 +54,7 @@
                 </div>
 
                 <div class='sell-buy-left-con-item-btn noselect'  v-if="token()" @click='buy()'> 买入 {{nowPairInfo.pair && nowPairInfo.pair.split('_')[0]}}</div>
-                <div class='sell-buy-left-con-item-btn login noselect'  v-if="!token()" @click='login()'>登录</div>
+                <div class='sell-buy-left-con-item-btn login noselect'  v-if="!token()" @click='login(true)'>登录</div>
             </div>
             
             <!-- 卖出 --> 
@@ -112,11 +111,11 @@
                 
 
                 <div class='sell-buy-left-con-item-btn sell-btn noselect' v-if="token()" @click='sell()'> 卖出 {{nowPairInfo.pair && nowPairInfo.pair.split('_')[0]}}</div>
-                <div class='sell-buy-left-con-item-btn login sell-btn noselect' v-if="!token()" @click='login()'>登录</div>
+                <div class='sell-buy-left-con-item-btn login sell-btn noselect' v-if="!token()" @click='login(true)'>登录</div>
             </div>
 
         </div>
-
+        <xtar-unlock v-if='unlockFlag' @close='login'></xtar-unlock>
     </div>
 </template>
 
@@ -135,6 +134,7 @@ export default {
     mixins: [ getPrecision ],
     data(){
         return {
+            unlockFlag: false,
             side: 'buy',
             
             timer: null,
@@ -405,8 +405,9 @@ export default {
             },6000)
         },
 
-        login(){
-            this.router.navigateByUrl(`/user/login?forward=/trade/${this.symbol}`)
+        login(type){
+            console.log('121212:',type)
+            this.unlockFlag = type
         }
     },
 }

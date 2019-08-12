@@ -173,9 +173,6 @@ function resetData(){
             return (res.status === 0 && res.data) || []
         })
     }
-    
-    
-
 }
 const reset = new resetData()
 export default reset

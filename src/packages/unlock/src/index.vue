@@ -159,7 +159,6 @@
                     </div>
                     <h3 class="container2-main-col2">解锁成功</h3>
                     <div class="container2-main-foot">
-                        <!-- <div class="container2-main-foot-btn" @mouseover='changeWaring(false)' @mouseout='changeWaring(true)' @click="mnemonicTip(false);login()">确认</div> -->
                         <div class="container2-main-foot-btn" @mouseover='changeWaring(false)' @mouseout='changeWaring(true)' @click="mnemonicTip(false)">确认</div>
                     </div>
                 </div>
@@ -173,6 +172,7 @@
 import service from "../../../utils/service";
 import regular from "../../../utils/regular";
 import xtar from "../../../utils/xtarUtil";
+import { pubSub } from "../../../watch/index";
 import { User } from "../../../utils/user";
 import load from "../../../utils/loading";
 export default {
@@ -394,8 +394,10 @@ export default {
             service.newLogin({user: this.account.msg.address}).then(res=>{
                 load.hide();
                 if(res.status == 0){
-                    load.tipErrorShow('解锁成功');
-                    this.mnemonicTip(true);
+                    pubSub.resetData();
+                    User.setObject('account',res.data);
+                    load.tipSuccessShow('解锁成功');
+                    this.$emit("close",false)
                 }else{
                     load.tipErrorShow('解锁失败,请重试');
                 }

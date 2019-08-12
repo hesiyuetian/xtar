@@ -1,4 +1,4 @@
-const debug = 'UAT';
+const debug = 'BETA';
 
 const UAT = {
     channel: 'XemcAUrqxnQK3SB1mETPFqSw49WwZ5r9EL',

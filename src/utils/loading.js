@@ -78,7 +78,6 @@ function Loadings(){
     }
     //tip 成功框
     this.tipSuccessShow = value => {
-        console.log(this.body,'this.body')
         this.hide();
         if(!this.body){ this.initBody() }
 

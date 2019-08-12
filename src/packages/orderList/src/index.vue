@@ -145,13 +145,15 @@
       </div>
 
       <div class="trad-foot-con-unlogin f-opacity" v-if="!token()">
-        您必须<a :href="forward">登录</a>才可看到此信息
+        您必须<a @click="login(true)">登录</a>才可看到此信息
       </div>
       <div style="margin-top: 20px;" v-if="token() && orderList.length <= 0">
         <xtar-load v-if="loadTrade"></xtar-load>
         <xtar-no-data v-if="!loadTrade"></xtar-no-data>
       </div>
     </ul>
+
+    <xtar-unlock v-if='unlockFlag' @close='login'></xtar-unlock>
   </div>
 </template>
 
@@ -169,6 +171,7 @@ export default {
     mixins: [ getPrecision ],
     data(){
         return {
+            unlockFlag: false,
             forward: '',
             symbol: '',
 
@@ -339,7 +342,11 @@ export default {
         },
         toNumber(num){
             return regular.toNumber(num)
+        },
+        login(type){
+          this.unlockFlag = type
         }
+
         
     }
 };

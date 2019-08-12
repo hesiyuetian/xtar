@@ -30,7 +30,7 @@ const getPrecision = {
         }
     },
     created() {
-        
+        this.watchHash();
     },
     mounted() {
         this.getInit();
@@ -108,15 +108,32 @@ const getPrecision = {
         }
     },
     methods: {
+        watchHash(){
+            if( ("onhashchange" in window) && ((typeof document.documentMode==="undefined") || document.documentMode==8)) {
+                window.onhashchange = hashChangeFire;
+              } else {
+                setInterval(function() {
+                    var ischanged = isHashChanged();
+                    if(ischanged) {
+                        hashChangeFire();  
+                    }
+                }, 150);
+              }
+              function hashChangeFire(){ pubSub.resetData() }
+        },
         getInit(){
             this.nowPairInfo = {};
             let pair = window.location.hash.replace('#','')
             reset.getTicker().then( res => {
                 if(!pair) pair = 'BTC_USDT'; 
+                const _Index = res.findIndex(ele => {
+                    return ele.pair === "BTC_USDT"
+                })
                 const Index = res.findIndex(ele => {
                     return ele.pair === pair
                 })
-                Index != -1 && (this.nowPairInfo = res[Index])
+                if(Index != -1) this.nowPairInfo = res[Index]
+                else this.nowPairInfo = res[_Index]
             })
         },
         watchReset(data){

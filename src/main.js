@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import './lib/theme/loading.scss'
+import './lib/theme/loading.css'
 import 'jquery';
 
 // base
