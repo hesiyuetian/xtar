@@ -105,11 +105,13 @@ export default {
                 ],
                 sell: [ ]
             },
-            // 备份深度数据
-            copyEchartsList: {
-                buy: [],
-                sell: []
-            },
+            // 交叉深度
+            sellCopyData: {},
+            buyCopyData: {},
+            //备份深度数据
+            buyTickerListData: [],
+            sellTickerListData: [],
+
             // 按钮操作
             fullscreenStatus: false,
         }
@@ -123,41 +125,60 @@ export default {
         watchPubSub.scoket( res => {
             if (res.type === 'depth') {
 				if (res.result.action == 'update') {
-					let _buy = res.result.data.buys, _sell = res.result.data.sells;
+                    let _buy = res.result.data.buys, _sell = res.result.data.sells;
 
 					// 卖    大
 					for (let item of _sell) {
-                        item.price = regular.toFixed(item.price, 8)
-                        
-                        let findIndex = this.copyEchartsList.sell.findIndex(ele => {
-                            return ele.price === item.price && ele.v < item.v
-                        })
-                        if(!!findIndex){
-                            this.echartsList.buy = this.copyEchartsList.buy.filter(ele => {
-                                return regular.comparedTo(ele.price, item.price) == -1
-                            })
-                        }
-                        this.echartsList.sell.push(item)
+						if (!this.sellCopyData[regular.toFixed(item.price, 8)] || (this.sellCopyData[regular.toFixed(item.price, 8)]) < item.v) {
+							this.sellCopyData[regular.toFixed(item.price, 8)] = item.v
+
+							// 处理交叉数据
+							const findBuy = this.buyTickerListData.filter((ele) => {
+								return Number(ele.price) >= Number(item.price)
+							})
+							for (let val of findBuy) {
+								let index = this.buyTickerListData.findIndex((ele) => {
+									return Number(ele.price) == Number(val.price)
+								})
+								this.buyTickerListData[index].amount = 0;
+							}
+                            
+							this.sellTickerListData = this.setSdddepth(this.sellTickerListData, item);
+						}
 					}
 
 					// 买    小
 					for (let item of _buy) {
-                        item.price = regular.toFixed(item.price, 8)
-                        
-                        let findIndex = this.copyEchartsList.buy.findIndex(ele => {
-                            return ele.price === item.price && ele.v < item.v
-                        })
-                        if(!!findIndex){
-                            this.echartsList.sell = this.copyEchartsList.sell.filter(ele => {
-                                return regular.comparedTo(ele.price, item.price) == 1
-                            })
-                        }
-                        this.echartsList.buy.push(item)
+						if(!this.buyCopyData[regular.toFixed(item.price, 8)] || (this.buyCopyData[regular.toFixed(item.price, 8)]) < item.v) {
+
+							this.buyCopyData[regular.toFixed(item.price,8)] = item.v;
+
+							// 处理交叉数据
+							if(item.amount > 0){
+								const findSell = this.sellTickerListData.filter((ele) => {
+									return Number(ele.price) < Number(item.price)
+								})
+								for (let val of findSell) {
+									let index = this.sellTickerListData.findIndex((ele) => {
+										return Number(ele.price) == Number(val.price)
+									})
+									this.sellTickerListData[index].amount = 0;
+								}
+							}
+							
+							this.buyTickerListData = this.setSdddepth(this.buyTickerListData, item);
+						}
                     }
-                    if(this.chartShow === "D") {
-                        this.copyEchartsList = JSON.parse(JSON.stringify(this.echartsList))
-                        this.throttled(3000, depthUtil.getDepthChartData(this.echartsList, regular, this))
-                    }
+                    
+                    this.echartsList.sell = this.sellTickerListData = this.sellTickerListData.filter((ele) => {
+                        return Number(regular.toFixed(ele.amount, this.nowPairInfo.amount_precision)) != 0 && !!ele.price
+                    });
+
+                    this.echartsList.buy = this.buyTickerListData = this.buyTickerListData.filter((ele) => {
+                        return Number(regular.toFixed(ele.amount, this.nowPairInfo.amount_precision)) != 0 && !!ele.price
+                    })
+
+                    if(this.chartShow === "D") this.throttled(1000)
 				}
 			} 
         })
@@ -277,21 +298,58 @@ export default {
                         buy: regular.makeDepth(data.data.buys),
                         sell: regular.makeDepth(data.data.sells),
                     }
-                    this.copyEchartsList = JSON.parse(JSON.stringify(this.echartsList))
+
+                    this.buyTickerListData = this.echartsList.buy;
+                    this.sellTickerListData = this.echartsList.sell;
+
+                    for (let item of this.echartsList.buy) {
+                        this.buyCopyData[item.price] = item.v;
+                    }
+
+                    for (let item of this.echartsList.sell) {
+                        this.sellCopyData[item.price] = item.v;
+                    }
+
                     depthUtil.getDepthChartData(this.echartsList, regular, this)
                 }
             }
             service.depthData({ pair: this.nowPairInfo.pair }).then(res => success(res))
         },
+
+        //ws添加深度数据
+        setSdddepth(list, data) {
+            let nData = [].concat(JSON.parse(JSON.stringify(list)));
+            let type = true;
+            let actIndex = null;
+            for (let i in nData) {
+                if (Number(nData[i].price) == Number(data.price)) {
+                    nData[i].amount = data.amount;
+                    if (regular.comparedTo(data.amount, '0') == 0 || Number(regular.toFixed(data.amount, this.nowPairInfo.amount_precision)) == 0) {
+                        actIndex = i;
+                    }
+                    type = false;
+                }
+            }
+
+            if (!!actIndex) {
+                nData.splice(Number(actIndex), 1);
+            }
+
+            if (type) {
+                data.isNew = 1;
+                nData.push(data)
+            }
+            return nData;
+        },
         
         // 深度图 设置 函数节流  delay: number, action: Function
-        throttled(delay, action){
+        throttled(delay){
             if (!this.throttleSwitch) {
                 return;
             }
             this.throttleSwitch = false;
             setTimeout(() => {
-                action();
+                depthUtil.getDepthChartData(this.echartsList, regular, this)
                 this.throttleSwitch = true;
             }, delay);
         },
