@@ -60,8 +60,8 @@
                         <span @click="putStatue('span', 1)">请输入密码（8位及以上）</span>
                         <input class="put-focus auth-input" :type=passwordType1 v-model="password1" autocomplete="off" :readonly=!password1FocusS @focus="putStatue('password1', true)" @blur="putStatue('password1', false)" @keyup="enterValue('password1');unlockBtn();" @change="enterValue('password1');unlockBtn();" />
                         
-                        <label class="iconfont label-light" v-if="passwordType1 == 'password'" @click="passwordIsShow('passwordType1')">&#xe683;</label>
-                        <label class="iconfont" v-if="passwordType1 == 'text'" @click="passwordIsShow('passwordType1')">&#xe682;</label>
+                        <img class="label-light" v-if="passwordType1 == 'password'" @click="passwordIsShow('passwordType1')" src="https://images.lyra.site/show.svg">
+                        <img class="" v-if="passwordType1 == 'text'" @click="passwordIsShow('passwordType1')" src="https://images.lyra.site/hide.svg">
                         <ul v-if="passwordSecurity>=0 && passwordSecurity<=2">
                             <li class="direction"></li>
                             <li>密码至少包含(大写、小写、数字、特殊符号)中的任意三种</li>
@@ -77,8 +77,8 @@
                         <span @click="putStatue('span', 2)">请确认密码</span>
                         <input class="put-focus auth-input" :type=passwordType2 v-model="password2" autocomplete="off" :readonly=!password2FocusS @focus="putStatue('password2', true)" @blur="putStatue('password2', false)" @keyup="enterValue('password2');unlockBtn();" @change="enterValue('password2');unlockBtn();" />
                         
-                        <label class="iconfont label-light" v-if="passwordType2 == 'password'" @click="passwordIsShow('passwordType2')">&#xe683;</label>
-                        <label class="iconfont" v-if="passwordType2 == 'text'" @click="passwordIsShow('passwordType2')">&#xe682;</label>
+                        <img class="label-light" v-if="passwordType2 == 'password'" @click="passwordIsShow('passwordType2')" src="https://images.lyra.site/show.svg">
+                        <img class="" v-if="passwordType2 == 'text'" @click="passwordIsShow('passwordType2')" src="https://images.lyra.site/hide.svg">
                         <ul v-if="password2 && (password1 != password2)">
                             <li class="direction"></li>
                             <li>两次密码不一致</li>
@@ -101,8 +101,10 @@
                 <div class="row4-col1" v-if="secretStatus == 1 && filesStatus == 1">
                     <div class="row4-col1-col2">
                         <span :class="{'row4-col1-col2-c': deleteFileStatus != 0}" >
-                            <em class="iconfont row4-col1-col2-s" v-if="deleteFileStatus == 0">&#xe61d;</em>
-                            <em class="iconfont " v-if="deleteFileStatus != 0" >&#xe608;</em>
+                            <img class="row4-col1-col2-s" v-if="deleteFileStatus == 0" src="https://images.lyra.site/success.svg" alt="">
+                            <img v-if="deleteFileStatus != 0" src="https://images.lyra.site/clos.svg" alt="">
+                            <!-- <em class="iconfont row4-col1-col2-s" v-if="deleteFileStatus == 0">&#xe61d;</em> -->
+                            <!-- <em class="iconfont " v-if="deleteFileStatus != 0" >&#xe608;</em> -->
                             {{fileName}}
                         </span>
                     </div>
@@ -110,7 +112,8 @@
                 </div>
                 <div class="row4-error" v-if="deleteFileStatus == 2">
                     错误 - keystore有误，请重新上传
-                    <span class="iconfont" @click="closeErrorFileTip()">&#xe608;</span>
+                    <!-- <span class="iconfont" @click="closeErrorFileTip()">&#xe608;</span> -->
+                    <img class="" @click="closeErrorFileTip()" src='https://images.lyra.site/closf.svg'>
                     <label>{{errorFileTime}}s</label>
                 </div>
                 <input id="upload" type="file" style="display: none" @change="addFile($event)"  />
@@ -135,8 +138,8 @@
                         <span @click="putStatue('span', 1)">请输入密码（8位及以上）</span>
                         <input class="put-focus auth-input" :type=passwordType1 v-model="password1" autocomplete="off" :readonly=!password1FocusS @focus="putStatue('password1', true)" @blur="putStatue('password1', false)" @keyup="enterValue('password1');unlockBtn();" @change="enterValue('password1');unlockBtn();" />
                         
-                        <label class="iconfont label-light" v-if="passwordType1 == 'password'" @click="passwordIsShow('passwordType1')">&#xe683;</label>
-                        <label class="iconfont" v-if="passwordType1 == 'text'" @click="passwordIsShow('passwordType1')">&#xe682;</label>
+                        <img class="label-light" v-if="passwordType1 == 'password'" @click="passwordIsShow('passwordType1')" src='https://images.lyra.site/show.svg'>
+                        <img class="" v-if="passwordType1 == 'text'" @click="passwordIsShow('passwordType1')" src='https://images.lyra.site/hide.svg'>
                         <ul v-if="password2 && (password1 != password2)">
                             <li class="direction"></li>
                             <li>密码至少包含(大写、小写、数字、特殊符号)中的任意三种</li>
@@ -150,7 +153,10 @@
             <!-- 导入成功 -->
             <div class="container2" v-if="step3Status">
                 <div class="container2-main" >
-                    <div class="container2-main-head"><span class="iconfont" @click="mnemonicTip(false)">&#xe608;</span></div>
+                    <div class="container2-main-head">
+                        <img @click="mnemonicTip(false)" src="https://images.lyra.site/clos.svg" alt="">
+                        <!-- <span class="iconfont" @click="mnemonicTip(false)">&#xe608;</span> -->
+                        </div>
                     <div class="container2-main-col1">
                         <div>
                             <img v-if="waringFlag" src="https://images.lyra.site/waring.png" />

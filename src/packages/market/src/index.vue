@@ -21,7 +21,8 @@
               v-model="tokenName"
               @keyup="onTokenNameChange()"
             />
-            <i class="f-cursor search iconfont iconxtar-icon-search"></i>
+            <img class='f-cursor search' src="https://beta.lyra.site/assets/images/search.svg" alt="">
+            <!-- <i class="f-cursor search iconfont iconxtar-icon-search"></i> -->
           </div>
           <div class="deal-market-price-option price-option">
             <div class="trade_tokenName" @click="tickerSort('pair');">
@@ -88,7 +89,6 @@
                 v-for="(i,index) of marketShowList"
                 :key="index"
                 :class="{'active-bg': symbol == i.pair}"
-                @click="onSymbolClick(i,i.pair)"
               >
                 <div class="trade_tokenName trade_tokenNames deal-font1">
                   <div class="f-opacity">
@@ -116,9 +116,6 @@
 
 <script>
 import BigNumber from "bignumber.js";
-// import { ScokeIoService } from '../../../service/scoke-io.service'
-// import { SkinServiceService } from '../../../service/skin-service.service'
-// import { TrickerService } from '../../../service/tricker.service';
 
 import { getPrecision } from '../../../lib/mixins/index'
 import service from "../../../utils/service";
@@ -128,6 +125,7 @@ import stores from "../../../dataStore/index";
 import load from "../../../utils/loading";
 import reset from "../../../utils/resetData";
 import xtarUtil from "../../../utils/xtarUtil";
+import { watchPubSub } from "../../../watch/index";
 
 export default {
   name: "XtarMarket",
@@ -165,7 +163,11 @@ export default {
   },
   filters: {},
   mounted() {
-    
+    watchPubSub.scoket( res => {
+      if (res.type === 'ticker' && !!res.result.data.pair) {
+				this.setWSPrice(res.result.data)
+			}
+    })
   },
   methods: {
     init() {
@@ -182,21 +184,20 @@ export default {
     },
 
     // ws推送价格
-    // setWSPrice(data) {
-    //   if (!this.tickerList || this.tickerList.length == 0) {
-    //     return;
-    //   }
-    //   let findIndex = this.tickerList.findIndex(val => {
-    //     return val.pair === data.pair;
-    //   });
-    //   if (findIndex != -1 && this.tickerList[findIndex].v < data.v) {
-    //     this.tickerList[findIndex].v = data.v;
-    //     this.tickerList[findIndex].close = data.close;
-    //     this.tickerList[findIndex].change = data.change;
-    //     this.analysisTicker();
-    //   }
-    //   this.subTickList(this.tickerList);
-    // },
+    setWSPrice(data) {
+      if (!this.tickerList || this.tickerList.length == 0) {
+        return;
+      }
+      let findIndex = this.tickerList.findIndex(val => {
+        return val.pair === data.pair;
+      });
+      if (findIndex != -1 && this.tickerList[findIndex].v < data.v) {
+        this.tickerList[findIndex].v = data.v;
+        this.tickerList[findIndex].close = data.close;
+        this.tickerList[findIndex].change = data.change;
+        this.analysisTicker();
+      }
+    },
 
     //排序
     tickerSort(type) {

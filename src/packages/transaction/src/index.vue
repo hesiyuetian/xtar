@@ -172,9 +172,10 @@ export default {
     watch: {
         nowPairInfo(now, pre){
             if(now.pair){
+                console.log('change:---change')
                 this.buyPrice = this.sellPrice = now.close
                 this.init()
-            } 
+            }
         }
     },
     mounted() {
@@ -292,7 +293,8 @@ export default {
             }
 
             this.buyNum = null;
-            if(Number(regular.toBigsells([params.amount,this.buyPrice],8)) <= Number(this.baseBalance)){
+            // if(Number(regular.toBigsells([params.amount,this.buyPrice],8)) <= Number(this.baseBalance)){
+            if(regular.comparedTo(regular.toBigsells([params.amount,this.buyPrice],8), this.baseBalance) != 1){
             // if(regular.toBigsells([params.amount,this.buyPrice],8) <= this.baseBalance){
                 this.trade(params)
             }else{
@@ -331,8 +333,8 @@ export default {
             }
 
             this.sellNum = null;
-            if(Number(params.amount) <= Number(this.quoteBalance)){
-            // if(regular.comparedTo(params.amount,this.quoteBalance) != -1){
+            // if(Number(params.amount) <= Number(this.quoteBalance)){
+            if(regular.comparedTo(params.amount,this.quoteBalance) != 1){
                 this.trade(params)
             }else{
                 const config = {
@@ -361,8 +363,6 @@ export default {
                 }
             }
 
-            
-
             params.version = CONFIG.version;
             params.pair = this.nowPairInfo.pair_address;
             params.expire = 0;
@@ -373,9 +373,7 @@ export default {
                 params.sig = this.auxBXA.orderSign(params,res);
                 params.sig && ( this.dialog.destroy(), service.create(params).then( res => { success(res) }) )
             }
-
             this.regularPwd(depoSig);
-            
         },
 
         // 交易确认密码
@@ -406,9 +404,11 @@ export default {
         },
 
         login(type){
-            console.log('121212:',type)
             this.unlockFlag = type
         }
+    },
+    beforeDestroy(){
+        clearInterval(this.timer)
     },
 }
 </script>

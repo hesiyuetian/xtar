@@ -148,9 +148,7 @@ export const tv = {
     },
 
     // 创建tradingView
-    createButton: (widget) => {
-        var _this = this;
-
+    createButton: (widget,_this) => {
         var buttons = [
             { title: "分时", resolution: '1', chartType: 3 },
             { title: "1分", resolution: '1', chartType: 1 },
@@ -163,8 +161,8 @@ export const tv = {
             { title: "1周", resolution: 'W', chartType: 1 },
             { title: "1月", resolution: 'M', chartType: 1 },
         ];
-        var resolution = this.cycle, chartType = 1;
-
+        var resolution = _this.cycle, chartType = 1;
+        
         for (var i = 0; i < buttons.length; i++) {
             (function (button) {
                 widget.createButton()

@@ -127,8 +127,11 @@ $sell_color : #FF6F79;
                     span{
                         opacity: $opction;
                     }
-                    i{
-                        margin: 0 !important;
+                    img{
+                        width: 14px;
+                        position: relative;
+                        top: 3px;
+                        margin-left: 4px;
                     }
                 }
                 &-selDepth:hover{

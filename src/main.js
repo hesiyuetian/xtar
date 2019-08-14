@@ -15,8 +15,8 @@ import xtarTransaction from './packages/transaction'
 import xtarKLine from './packages/kLine'
 import xtarUnlock from './packages/unlock'
 
-import reset from './utils/resetData'
-reset.resetTicker();
+// import reset from './utils/resetData'
+// reset.resetTicker();
 
 const components = [
     xtarLoad,

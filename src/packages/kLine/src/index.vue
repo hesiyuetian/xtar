@@ -2,7 +2,7 @@
     <div class="trad-content">
         <div class='trad-content-left'>
             <div class='trad-content-left-head'>
-                <span class='trad-content-left-head-font' :class="{'act': chartShow == 'k'}" @click='changeChart("k")'>K线图{{chartShow}}</span>
+                <span class='trad-content-left-head-font' :class="{'act': chartShow == 'k'}" @click='changeChart("k")'>K线图</span>
                 <span class='trad-content-left-head-font' :class="{'act': chartShow !== 'k'}" @click='changeChart("D")'>深度图</span>
                 <span class="icon_start">
                     <span class='f-opacity'>{{nowPairInfo.pair && nowPairInfo.pair.replace(/_/g, '/')}}</span>
@@ -44,13 +44,12 @@
                     <div id="k-line"></div>
                 </div>
                 
-                <div ref='xtarContainer' id="container" v-show="chartShow === 'D'" style="width:100%;height:100%"></div>
-                <div class='container_zhan f-center' v-show="chartShow === 'D' && this.echartsList.buy.length == 0 && this.echartsList.sell.length == 0">
+                <div ref='xtarContainer' id="container" v-show="chartShow === 'D'" style="width:100%; height:100%"></div>
+                <div class='container_zhan f-center' v-if="chartShow === 'D' && this.echartsList.buy.length == 0 && this.echartsList.sell.length == 0">
                     <xtar-no-data class='no-data'></xtar-no-data>
                 </div>
             </div>
     
-            
         </div>
     </div>
 </template>
@@ -66,9 +65,11 @@ import reset from "../../../utils/resetData";
 import { tv } from "./tradview";
 import { depthUtil } from "./depth";
 import { CONFIG } from '../../../utils/config';
+import { watchPubSub } from "../../../watch/index";
 import * as echarts from "echarts";
 import Datafeeds from '../../../lib/trading/datafeed/udf/datafeed';
 import TradingView from '../../../lib/trading/charting_library.min.js';
+
 export default {
     name: "XtarKLine",
     mixins: [ getPrecision ],
@@ -96,31 +97,76 @@ export default {
             // 深度图开始
             depth: null,
             depthDataS: null,
+            initDepthFlag: true,
             // erach
             echartsList: {
                 buy: [
                     // { 'quantity': 6000.00000000, 'price': 6004.0 },
                 ],
-                sell: [
-
-                ]
+                sell: [ ]
             },
-            
+            // 备份深度数据
+            copyEchartsList: {
+                buy: [],
+                sell: []
+            },
             // 按钮操作
             fullscreenStatus: false,
         }
     },
     watch: {
         nowPairInfo(now, pre){
-            if(now.pair){
-                this.init()
-            } 
+            if(now.pair) this.init()
         }
+    },
+    mounted() {
+        watchPubSub.scoket( res => {
+            if (res.type === 'depth') {
+				if (res.result.action == 'update') {
+					let _buy = res.result.data.buys, _sell = res.result.data.sells;
+
+					// 卖    大
+					for (let item of _sell) {
+                        item.price = regular.toFixed(item.price, 8)
+                        
+                        let findIndex = this.copyEchartsList.sell.findIndex(ele => {
+                            return ele.price === item.price && ele.v < item.v
+                        })
+                        if(!!findIndex){
+                            this.echartsList.buy = this.copyEchartsList.buy.filter(ele => {
+                                return regular.comparedTo(ele.price, item.price) == -1
+                            })
+                        }
+                        this.echartsList.sell.push(item)
+					}
+
+					// 买    小
+					for (let item of _buy) {
+                        item.price = regular.toFixed(item.price, 8)
+                        
+                        let findIndex = this.copyEchartsList.buy.findIndex(ele => {
+                            return ele.price === item.price && ele.v < item.v
+                        })
+                        if(!!findIndex){
+                            this.echartsList.sell = this.copyEchartsList.sell.filter(ele => {
+                                return regular.comparedTo(ele.price, item.price) == 1
+                            })
+                        }
+                        this.echartsList.buy.push(item)
+                    }
+                    if(this.chartShow === "D") {
+                        this.copyEchartsList = JSON.parse(JSON.stringify(this.echartsList))
+                        this.throttled(3000, depthUtil.getDepthChartData(this.echartsList, regular, this))
+                    }
+				}
+			} 
+        })
     },
     methods: {
         init() {
             setTimeout(_ => {
                 this.initKLine();
+                this.initDept();
             }, 500)
         },
 
@@ -132,11 +178,10 @@ export default {
 
         // K线深度切换
         changeChart(val) {
-            if(val === 'k' && this.depth) this.depth.clear();
             this.chartShow = val;
             setTimeout(_ => {
                 if (val == 'k') this.initKLine();
-                else this.initDept();
+                else this.depth.resize(), this.getDepth();
             }, 500)
         },
 
@@ -167,7 +212,7 @@ export default {
                 timeframe: this.cycle,
                 
                 container_id: "k-line",
-                datafeed: new Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,3000),
+                datafeed: new Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,30000),
                 library_path: "src/lib/trading/",
                 locale: User.getItem('language') || "zh", // en
                 // 不显示元素
@@ -199,7 +244,7 @@ export default {
                 //设置均线种类 均线样式
                 tv.createStudy(this.widget);
                 //生成时间按钮
-                tv.createButton(this.widget);
+                tv.createButton(this.widget, this);
                 this.widget.chart().setChartType(chartType);
             });
 
@@ -218,14 +263,22 @@ export default {
                 this.depth.clear();
             }
             this.depth = echarts.init(domContainer);
-            this.getDepth();
+            
         },
 
-
+        // 初始化depth数据
         getDepth(){
+            if(!this.initDepthFlag) return depthUtil.getDepthChartData(this.echartsList, regular, this)
+            
             const success = data => {
                 if (data.status === 0) {
-                    depthUtil.getDepthChartData(data.data, regular, this)
+                    this.initDepthFlag = false;
+                    this.echartsList = {
+                        buy: regular.makeDepth(data.data.buys),
+                        sell: regular.makeDepth(data.data.sells),
+                    }
+                    this.copyEchartsList = JSON.parse(JSON.stringify(this.echartsList))
+                    depthUtil.getDepthChartData(this.echartsList, regular, this)
                 }
             }
             service.depthData({ pair: this.nowPairInfo.pair }).then(res => success(res))
@@ -242,6 +295,7 @@ export default {
                 this.throttleSwitch = true;
             }, delay);
         },
+        
 
         //k线上边的交易对收藏图标：hover效果
         favSymbol(status,type){

@@ -3,12 +3,7 @@
     <div class='kline'>
       <xtar-k-line></xtar-k-line>
     </div>
-    <div class='orderlist'>
-      <xtar-order-list></xtar-order-list>
-    </div>
-    <div class='trde'>
-      <xtar-transaction></xtar-transaction>
-    </div>
+    
     <div class='symbole'>
       <xtar-market></xtar-market>
     </div>
@@ -18,6 +13,12 @@
     </div>
     <div class='new'>
       <xtar-new-trade></xtar-new-trade>
+    </div>
+    <div class='trde'>
+      <xtar-transaction></xtar-transaction>
+    </div>
+    <div class='orderlist'>
+      <xtar-order-list></xtar-order-list>
     </div>
 
   </div>

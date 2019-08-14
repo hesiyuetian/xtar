@@ -1,14 +1,10 @@
-import BigNumber from 'bignumber.js';
+
 export const depthUtil = {
 
     // earch **** 初始化
     getDepthChartData: (data, regular, that) => {
-        that.echartsList = {
-            buy: regular.makeDepth(data.buys),
-            sell: regular.makeDepth(data.sells),
-        }
-        if (that.echartsList.buy[0] || that.echartsList.sell[0]) {
-            that.depthDataS = depthUtil.formatterDepth(that.echartsList);
+        if (data.buy[0] || data.sell[0]) {
+            that.depthDataS = depthUtil.formatterDepth(data,regular,that);
             depthUtil.setOption(that.depthDataS,regular,that);
         }
     },
@@ -42,7 +38,7 @@ export const depthUtil = {
         };
     },
 
-    formatterDepth: (res) => {
+    formatterDepth: (res,regular,that) => {
 
         const bids = res.buy.sort(depthUtil.sortPipe('price', true));
         const asks = res.sell.sort(depthUtil.sortPipe('price', false));
@@ -66,11 +62,9 @@ export const depthUtil = {
             amounts = [];
             prices = [];
             for (const buyData of datas) {
-
                 bidsTotal = Number(bidsTotal) + Number(buyData.amount);
-
-                amounts.push(bidsTotal);
-                prices.push(buyData.price);
+                amounts.push(regular.toFixed(bidsTotal,that.nowPairInfo.amount_precision));
+                prices.push(regular.toFixed(buyData.price,that.nowPairInfo.price_precision));
             }
             maxBuyPrice = Math.max.apply(null, prices);
             minBuyPrice = Math.min.apply(null, prices);
@@ -84,8 +78,8 @@ export const depthUtil = {
             prices = [];
             for (const sellData of datas) {
                 asksTotal = Number(asksTotal) + Number(sellData.amount);
-                amounts.push(asksTotal);
-                prices.push(sellData.price);
+                amounts.push(regular.toFixed(asksTotal,that.nowPairInfo.amount_precision));
+                prices.push(regular.toFixed(sellData.price,that.nowPairInfo.price_precision));
             }
             maxSellPrice = Math.max.apply(null, prices);
             minSellPrice = Math.min.apply(null, prices);

@@ -23,7 +23,7 @@ export const pubSub = {
         PubSub.publish('scoket', data)
     },
 
-    // 发布 scoket推送数据
+    // 发布 最新下单消息
     newOrder: data => {
         PubSub.publish('newOrder', data)
     },
@@ -31,7 +31,6 @@ export const pubSub = {
 
 
 export const watchPubSub = {
-    // 发布事件
     resetData: FN => {
         PubSub.subscribe('reset', (msg, data) => {
             FN(data)

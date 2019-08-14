@@ -17,7 +17,8 @@
                         <span class='head-item-selDepth'>
                             <span>
                                 {{depthVal}}
-                                <i class='iconfont' :class="{'up': sleDepthFlag,'down': !sleDepthFlag}">&#xe606;</i>
+                                <!-- <i class='iconfont' :class="{'up': sleDepthFlag,'down': !sleDepthFlag}">&#xe606;</i> -->
+                                <img class='iconfont' :class="{'up': sleDepthFlag,'down': !sleDepthFlag}" src='https://images.lyra.site/arrow.svg'>
                             </span>
                         </span>
                         <div v-if="sleDepthFlag" class='head-shen-dialog'>
@@ -95,7 +96,7 @@
             <!-- 最新交易 -->
             <template v-if='mode'>
                 <div class='new-special new-special-trad' v-if='isNewTrade'>
-                    <xtar-new-trade></xtar-new-trade>
+                    <xtar-new-trade :isHead=newTradHead></xtar-new-trade>
                 </div>
             </template>
         </div>
@@ -111,12 +112,14 @@ import { User } from "../../../utils/user";
 import stores from "../../../dataStore/index";
 import load from "../../../utils/loading";
 import reset from "../../../utils/resetData";
+import { watchPubSub } from "../../../watch/index";
 
 export default {
     name: "XtarDepth",
     mixins: [ getPrecision ],
     data(){
         return {
+            newTradHead: false,
             // 当前币对
             icon: '',
 
@@ -194,11 +197,109 @@ export default {
         }
     },
     watch: {
+        price_precision(now, pre){
+            if(!!now){
+                this.depthPrecision = now;
+                this.calcDepth(this.depthPrecision);
+                this.changeDepth(this.depthPrecision);
+            }
+        },
         nowPairInfo(now, pre){
-            if(now.pair) this.init()
+            if(now.pair) this.init();
         }
     },
     mounted() {
+        watchPubSub.scoket( res => {
+            if (res.type === 'depth') {
+				if (res.result.action == 'update') {
+					let _buy = res.result.data.buys, _sell = res.result.data.sells;
+					this.resetDepth();
+
+					// 卖    大
+					for (let item of _sell) {
+						// if(!this.sellCopyData[regular.toFixed(item.price,8)] || this.sellCopyData[regular.toFixed(item.price,8)] < item.v ){
+						if (!this.sellCopyData[regular.toFixed(item.price, 8)] || (this.sellCopyData[regular.toFixed(item.price, 8)]).split('-')[0] < item.v) {
+
+							// this.sellCopyData[regular.toFixed(item.price,8)] = item.v
+							this.sellCopyData[regular.toFixed(item.price, 8)] = `${item.v}-${item.amount}`
+
+							// 处理交叉数据
+							const findBuy = this.buyTickerListData.filter((ele) => {
+								return Number(ele.price) >= Number(item.price)
+							})
+							for (let val of findBuy) {
+								let index = this.buyTickerListData.findIndex((ele) => {
+									return Number(ele.price) == Number(val.price)
+								})
+								this.buyTickerListData[index].amount = 0;
+							}
+
+							this.sellTickerListData = this.setSdddepth(this.sellTickerListData, item);
+							
+							let sell = this.sellTickerListData.sort((pre, next) => {
+								return Number(next.price) - Number(pre.price)
+							})
+							this.copyDeptList.sell = sell;
+						}
+					}
+
+
+					// 买    小
+					for (let item of _buy) {
+						// if(!this.buyCopyData[regular.toFixed(item.price,8)] || this.buyCopyData[regular.toFixed(item.price,8)] < item.v ){
+						if (!this.buyCopyData[regular.toFixed(item.price, 8)] || (this.buyCopyData[regular.toFixed(item.price, 8)]).split('-')[0] < item.v) {
+							// this.buyCopyData[regular.toFixed(item.price,8)] = item.v;
+							this.buyCopyData[regular.toFixed(item.price, 8)] = `${item.v}-${item.amount}`;
+
+							// 处理交叉数据
+							if(item.amount > 0){
+								const findSell = this.sellTickerListData.filter((ele) => {
+									return Number(ele.price) < Number(item.price)
+								})
+								for (let val of findSell) {
+									let index = this.sellTickerListData.findIndex((ele) => {
+										return Number(ele.price) == Number(val.price)
+									})
+									this.sellTickerListData[index].amount = 0;
+								}
+							}
+							
+
+							this.buyTickerListData = this.setSdddepth(this.buyTickerListData, item);
+
+							let buy = this.buyTickerListData.sort((pre, next) => {
+								return Number(next.price) - Number(pre.price)
+							})
+							// this.copyDeptList.buy = this.depthD(buy, 0);
+							this.copyDeptList.buy = buy;
+						}
+					}
+
+					if(_sell.length > 0){
+						this.copyDeptList.sell = this.sellTickerListData = this.sellTickerListData.filter((ele) => {
+							return Number(regular.toFixed(ele.amount, this.nowPairInfo.amount_precision)) != 0 && !!ele.price
+						});
+						
+						this.deptList.sell = this.depthD(this.depthMerge(this.copyDeptList.sell, this.depthPrecision, 1).sort((pre, next) => {
+							return Number(next.price) - Number(pre.price)
+						}),1);
+					}
+
+					if(_buy.length > 0){
+						this.copyDeptList.buy = this.buyTickerListData = this.buyTickerListData.filter((ele) => {
+							return Number(regular.toFixed(ele.amount, this.nowPairInfo.amount_precision)) != 0 && !!ele.price
+						})
+						this.deptList.buy = this.depthD(this.depthMerge(this.copyDeptList.buy, this.depthPrecision, 0).sort((pre, next) => {
+							return Number(next.price) - Number(pre.price)
+						}),0);
+					}
+
+					// this.throttled(1000, () => {
+					// 	this.scoket.setDepth(this.deptList)
+					// })
+				}
+			} 
+        })
     },
     methods: {
         init() {

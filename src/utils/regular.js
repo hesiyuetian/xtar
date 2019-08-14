@@ -238,9 +238,9 @@ function regular() {
 
     // 组装深度数据 [price,amount,v] ==> {price:'',amount:'',v:''}
     this.makeDepth = data => {
-        if(data.length < 1) return [];
+        if(data && data.length < 1) return [];
         let _copy= [];
-        data.map(item=>{
+        data && data.map(item=>{
             let obj = {price:'',amount:'',v:''};
             [obj.price,obj.amount,obj.v] = [item[0],item[1],item[2]];
             _copy.push(obj)

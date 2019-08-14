@@ -1,6 +1,6 @@
 <template>
-    <div class="sell-buy-right border-box">
-        <header class='head'>
+    <div class="sell-buy-right border-box" :style="{'border': !isHead && 'none'}">
+        <header class='head' v-if='isHead'>
             <span class='head-item'>最新交易</span>
         </header>
 
@@ -35,6 +35,7 @@
 import { getPrecision } from '../../../lib/mixins/index'
 import service from "../../../utils/service";
 import load from "../../../utils/loading";
+import { watchPubSub } from "../../../watch/index";
 
 export default {
     name: 'XtarNewTrade',
@@ -52,10 +53,36 @@ export default {
             if(now.pair) this.init()
         }
     },
+    props: {
+        isHead: {
+            type: Boolean,
+            default: true
+        }
+    },
     filters:{
         
     },
     mounted() {
+        watchPubSub.scoket( res => {
+            if (res.type === 'trade') {
+            if (res.result.action == 'insert') {
+                
+                for (let val of this.newTradList) {
+                val.isnew = false;
+                }
+
+                for (let item of res.result.data) {
+                item.isnew = true;
+                }
+                
+                this.newTradList = [...this.newTradList, ...res.result.data]
+
+                if (this.newTradList.length && this.newTradList.length > 100) {
+                this.newTradList = this.newTradList.slice(0, 100);
+                }
+            }
+            }
+        })
     },
     methods: {
         init() {

@@ -6,6 +6,8 @@ import { User } from '../../utils/user'
 const getPrecision = {
     data(){
         return {
+            // 价格精度
+            price_precision: 8,
             nowPairInfo: {
                 amount_precision: 3,
                 base: "",
@@ -30,11 +32,26 @@ const getPrecision = {
         }
     },
     created() {
+        reset.inits();
         this.watchHash();
     },
     mounted() {
-        this.getInit();
-        watchPubSub.resetData(data =>{this.watchReset(data) })
+        this.getInit("init");
+        watchPubSub.resetData(data => {this.getInit("hash")})
+        watchPubSub.scoket( data => {
+            if(data.type === 'ticker'){
+                if(data.result.data.pair === this.nowPairInfo.pair){
+                    this.nowPairInfo.v = data.result.data.v;
+                    this.nowPairInfo.close = data.result.data.close;
+                    this.nowPairInfo.change = data.result.data.change;
+                    this.nowPairInfo.base_vol = data.result.data.base_vol;
+                    this.nowPairInfo.high = data.result.data.high;
+                    this.nowPairInfo.low = data.result.data.low;
+                    this.nowPairInfo.open = data.result.data.open;
+                    this.nowPairInfo.quote_vol = data.result.data.quote_vol;
+                }
+            }
+        })
     },
     
     filters: {
@@ -121,7 +138,7 @@ const getPrecision = {
               }
               function hashChangeFire(){ pubSub.resetData() }
         },
-        getInit(){
+        getInit(type){
             this.nowPairInfo = {};
             let pair = window.location.hash.replace('#','')
             reset.getTicker().then( res => {
@@ -132,14 +149,15 @@ const getPrecision = {
                 const Index = res.findIndex(ele => {
                     return ele.pair === pair
                 })
-                if(Index != -1) this.nowPairInfo = res[Index]
-                else this.nowPairInfo = res[_Index]
+
+                if(Index != -1) this.nowPairInfo = res[Index],this.price_precision = res[Index].price_precision
+                else this.nowPairInfo = res[_Index],this.price_precision = res[_Index].price_precision
+
+                if(type === 'init') reset.initWS(this.nowPairInfo.pair);
+                else if(type === 'hash') reset.emitPair(this.nowPairInfo.pair);
+                
             })
         },
-        watchReset(data){
-            this.getInit()
-        },
-
 
         // (用户）公用方法定义如下：
         token(){

@@ -99,11 +99,12 @@
                 v-if="item.status == 2 || item.status == 3 || (item.status == 4 && toNumber(item.filled_amount) != 0)"
                 @click="orderDetial(item.order_id,index)"
               >
-                details
-                <i
+                详情
+                <img class="labels" :class="{'animation-triangle': detailKey == index}" src="https://images.lyra.site/down.svg" alt="" >
+                <!-- <i
                   class="labels iconfont iconfilterarrowdown"
                   :class="{'animation-triangle': detailKey == index}"
-                ></i>
+                ></i> -->
               </span>
               <span
                 class="f-cursor revoke"
@@ -207,6 +208,7 @@ export default {
         }
     },
     mounted() {
+      
     },
     beforeDestroy(){
         clearInterval(this.timer)
@@ -306,7 +308,8 @@ export default {
             clearInterval(this.timer);
             this.getOrderList();
             this.timer = setInterval(()=>{
-                this.getOrderList();
+                if(!this.token()) return clearInterval(this.timer);
+                else this.getOrderList();
             },6000)
         },
 

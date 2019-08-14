@@ -95,11 +95,12 @@
 }
 .row3-cols1{
     position: relative;
-    em{
+    img{
         position: absolute;
         right: 0px;
         bottom: 6px;
         cursor: pointer;
+        width: 19px;
     }
 }
 .row3-cols2{
@@ -145,10 +146,11 @@
         &-col2{
             height:79px;
             line-height: 79px;
-            em{
+            img{
                 margin-right: 5px;
                 position: relative;
-                top: 2px;
+                top: 4px;
+                width: 16px;
             }
             &-s{
                 color: #00B553;
@@ -184,9 +186,12 @@
             float: right;
             padding-right: 30px;
         }
-        span{
+        img{
             float: right;
             cursor: pointer;
+            width: 18px;
+            position: relative;
+            top: 15px;
         }
     }
 }
@@ -377,11 +382,12 @@
         opacity: 0.3;
         // z-index: -1;
     }
-    label{
+    img{
         position: absolute;
-        bottom: 8px;
+        bottom: 4px;
         right: 0px;
         cursor: pointer;
+        width: 25px;
     }
     .label-light{
         // color: rgba(26,27,41,0.2)

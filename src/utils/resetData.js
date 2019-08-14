@@ -1,6 +1,7 @@
 import service from './service';
 import regular from './regular';
 import { pubSub } from '../watch/index'
+import scoket from './scoket'
 function resetData(){
     // 行情列表(需要一直维护)
     this.ticker = [];
@@ -12,8 +13,33 @@ function resetData(){
     // pair
     this.pairsList = [];
 
+    // 初始化数据标记
+    this.resetFlag = true;
+
+    // 初始化ws数据标记
+    this.wsFlag = true;
+
+    // 初始化基础数据
     this.inits = () => {
-        Promise.all([this.pairs(),this.coins()])
+        if(this.resetFlag){
+            this.resetFlag = false;
+            this.resetTicker()
+        }
+    }
+
+    // 初始化WS
+    this.initWS = (pair) => {
+        if(this.wsFlag){
+            this.wsFlag = false;
+            scoket.onCenten(pair)
+        }
+    }
+
+    // 切换WS交易对
+    this.emitPair = (pair) => {
+        if(this.wsFlag){
+            scoket.emitPair(pair)
+        }
     }
 
     /**
