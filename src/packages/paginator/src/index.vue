@@ -56,7 +56,6 @@
 
 <script>
 import { pubSub } from '../../../watch/index'
-import stores from '../../../dataStore/index' 
 export default {
   name: "XtarPaginator",
   data() {
@@ -216,9 +215,7 @@ export default {
     }
   },
   mounted() {
-    setTimeout(_=>{
-      console.log("get Index.js data", stores.pairs)
-    },1000)
+    
   },
 };
 </script>

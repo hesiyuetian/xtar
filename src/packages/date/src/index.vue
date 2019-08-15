@@ -119,8 +119,6 @@ Date.prototype.format = function(fmt) {
     return fmt;
 };
 
-import { watchPubSub } from '../../../watch/index'
-import stores from '../../../dataStore/index' 
 export default {
   name: "XtarDate",
   data() {
@@ -251,17 +249,8 @@ export default {
   },
   created() {
     let pair = window.location.hash.replace('#','')
-    console.log(pair,'pair')
   },
   mounted() {
-    watchPubSub.resetData(data =>{
-      this.resetd = data
-      console.log(data,'Watch-reset,date组件')
-    })
-    watchPubSub.changeTicker(data => {
-      console.log('date组件-接收到tickers:', data)
-      console.log('date组件-stores获取到tickers:', stores.ticker)
-    })
     window.onresize = _ => {
       clearTimeout(this.timer);
       this.timer = setTimeout(_ => {

@@ -59,7 +59,6 @@ import { getPrecision } from '../../../lib/mixins/index'
 import service from "../../../utils/service";
 import regular from "../../../utils/regular";
 import { User } from "../../../utils/user";
-import stores from "../../../dataStore/index";
 import load from "../../../utils/loading";
 import reset from "../../../utils/resetData";
 import { tv } from "./tradview";
@@ -67,12 +66,6 @@ import { depthUtil } from "./depth";
 import { CONFIG } from '../../../utils/config';
 import { watchPubSub } from "../../../watch/index";
 import * as echarts from "echarts";
-// import Datafeeds from '../../../../assets/trading/datafeed/udf/datafeed';
-// import TradingView from '../../../../assets/trading/charting_library.min.js';
-
-// import Datafeeds from '../../../../static/trading/datafeed/udf/datafeed';
-// import TradingView from '../../../../static/trading/charting_library.min.js';
-
 export default {
     name: "XtarKLine",
     mixins: [ getPrecision ],
@@ -127,9 +120,7 @@ export default {
     props: {
         src: {
             type: String,
-        },
-        tradingView: null,
-        datafeeds: null
+        }
     },
     mounted() {
         watchPubSub.scoket( res => {
@@ -243,10 +234,8 @@ export default {
                 timeframe: this.cycle,
                 
                 container_id: "k-line",
-                datafeed: new window.Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,3000000000),
+                datafeed: new window.Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,3000),
                 library_path: this.src,
-                // library_path: "https://images.lyra.site/static/trading/",
-                // library_path: this.src,
                 locale: User.getItem('language') || "zh", // en
                 // 不显示元素
                 disabled_features: tv.getDisFeatures(),
