@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
+import './lib/theme/reset.css'
 import './lib/theme/loading.css'
-import 'jquery';
 
 // base
 import xtarLoad from './packages/base/load/index'
 import xtarNoData from './packages/base/noData/index'
+import xtarAlert from './packages/base/alert/index'
+import xtarPwd from './packages/base/pwd/index'
 
 import xtarMarket from './packages/market/index'
 import xtarOrderList from './packages/orderList/index'
@@ -15,12 +17,11 @@ import xtarTransaction from './packages/transaction'
 import xtarKLine from './packages/kLine'
 import xtarUnlock from './packages/unlock'
 
-// import reset from './utils/resetData'
-// reset.resetTicker();
-
 const components = [
     xtarLoad,
     xtarNoData,
+    xtarAlert,
+    xtarPwd,
 
     xtarMarket,
     xtarOrderList,

@@ -26,7 +26,7 @@ function Loadings(){
         //             </div>
         //            </div>`;
         let DOM = `<div class="loadings">
-                        <img class='loadings-loading f-center' src="https://beta.lyra.site/assets/images/loading_apng.png" alt="">
+                        <img class='loadings-loading f-center' src="https://images.lyra.site/loading_apng.png" alt="">
                    </div>`;
         let popups = document.createElement('div');
         popups.className = 'popups';
@@ -64,7 +64,7 @@ function Loadings(){
         let DOM = `<div class="tip-alert" > 
                     <div class="tip-main tip-putong" >
                         ${v}
-                        <span class="iconfont tip-close">&#xe608;</span>
+                        <img class="tip-close f-cursor" src="https://images.lyra.site/closf.svg" alt="">
                     </div>
                     
                    </div>`;
@@ -85,7 +85,7 @@ function Loadings(){
         let DOM = `<div class="tip-alert" > 
                     <div class="tip-main tip-success" >
                         ${v}
-                        <span class="iconfont tip-close">&#xe608;</span>
+                        <img class="tip-close f-cursor" src="https://images.lyra.site/closf.svg" alt="">
                     </div>
                     
                    </div>`;
@@ -106,7 +106,7 @@ function Loadings(){
         let DOM = `<div class="tip-alert" > 
                     <div class="tip-main tip-warning" >
                         ${v}
-                        <span class="iconfont tip-close" >&#xe608;</span>
+                        <img class="tip-close f-cursor" src="https://images.lyra.site/closf.svg" alt="">
                     </div>
                     
                    </div>`;
@@ -128,7 +128,7 @@ function Loadings(){
         let DOM = `<div class="tip-alert" > 
                     <div class="tip-main tip-error" >
                         ${v}
-                        <span class="iconfont tip-close">&#xe608;</span>
+                        <img class="tip-close f-cursor" src="https://images.lyra.site/closf.svg" alt="">
                     </div>
                    </div>`;
         let popups = document.createElement('div');
@@ -197,7 +197,9 @@ function Loadings(){
                     <div class="frame-main" >
                         <div class='alerted'>
                             ${value}
-                            <div style='text-align: center;margin-top:20px;'><span class="iconfont tip-close f-cursor">&#xe608;</span></div>
+                            <div style='text-align: center;margin-top:20px;'>
+                                <img class="tip-close f-cursor" src="https://images.lyra.site/closf.svg" alt="">
+                            </div>
                         </div>
                         
                     </div>

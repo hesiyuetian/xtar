@@ -8,7 +8,7 @@
                     <span class='f-opacity'>{{nowPairInfo.pair && nowPairInfo.pair.replace(/_/g, '/')}}</span>
                 </span>
                 <span class='trad-content-left-head-all' :class="{'f-cursor': chartShow == 'k', 'f-cursor-not': chartShow != 'k'}" @click='chartShow == "k" ? onFullScreenClick($event) : "" '>
-                    <img @mouseover="favSymbol(true,'fullscreenStatus')" @mouseleave="favSymbol(false,'fullscreenStatus')" :src="fullscreenStatus ? 'https://beta.lyra.site/assets/images/fullscreen_hover.svg' : 'https://beta.lyra.site/assets/images/fullscreen.svg'" alt="">
+                    <img @mouseover="favSymbol(true,'fullscreenStatus')" @mouseleave="favSymbol(false,'fullscreenStatus')" :src="fullscreenStatus ? 'https://images.lyra.site/fullscreen_hover.svg' : 'https://images.lyra.site/fullscreen.svg'" alt="">
                 </span>
             </div>
 

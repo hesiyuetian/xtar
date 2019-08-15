@@ -21,7 +21,7 @@
               v-model="tokenName"
               @keyup="onTokenNameChange()"
             />
-            <img class='f-cursor search' src="https://beta.lyra.site/assets/images/search.svg" alt="">
+            <img class='f-cursor search' src="https://images.lyra.site/search.svg" alt="">
             <!-- <i class="f-cursor search iconfont iconxtar-icon-search"></i> -->
           </div>
           <div class="deal-market-price-option price-option">

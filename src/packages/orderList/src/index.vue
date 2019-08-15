@@ -153,7 +153,7 @@
         <xtar-no-data v-if="!loadTrade"></xtar-no-data>
       </div>
     </ul>
-
+    <xtar-alert v-if='cancelFlag' :config='config'></xtar-alert>
     <xtar-unlock v-if='unlockFlag' @close='login'></xtar-unlock>
   </div>
 </template>
@@ -191,7 +191,9 @@ export default {
             orderId: '',
             detailDetailList: [],
 
-            fullscreenStatus: false
+            // 取消订单
+            config: {},
+            cancelFlag: false
         }
     },
     watch: {
@@ -261,14 +263,15 @@ export default {
         },
 
         cancel(orderId) {
-            // const config = {
-            //     tip: this.translate.instant('tradeFoot.cancelOrder'),
-            //     ok: this.translate.instant('common.send'),
-            //     callbackSure: ()=>{
-            //         this.cancelOrder(orderId)
-            //     },
-            //     callbackCancel: ()=>{ },
-            // }
+            this.config = {
+                tip: "是否取消该订单",
+                ok: "确定",
+                callbackSure: ()=>{
+                    this.cancelOrder(orderId)
+                },
+                callbackCancel: ()=>{ this.cancelFlag = false },
+            }
+            this.cancelFlag = true;
             // this.dialog.createFromComponent(ConterAlertComponent,config)
         },
 
@@ -280,6 +283,7 @@ export default {
             const success = data => {
                 if (data.status === 0) {
                     load.tipSuccessShow('撤单成功');
+                    this.cancelFlag = false;
                     this.init();
                 } else {
                     load.tipErrorShow(data.msg);
@@ -307,7 +311,12 @@ export default {
             clearInterval(this.timer);
             this.getOrderList();
             this.timer = setInterval(()=>{
-                if(!this.token()) return clearInterval(this.timer);
+                if(!this.token()){
+                  this.orderList = [];
+                  clearInterval(this.timer);
+                  this.pubSub.resetData();
+                  return 
+                } 
                 else this.getOrderList();
             },6000)
         },

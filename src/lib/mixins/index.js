@@ -6,6 +6,8 @@ import { User } from '../../utils/user'
 const getPrecision = {
     data(){
         return {
+            // 发布事件中心
+            pubSub: pubSub,
             // 价格精度
             price_precision: 8,
             nowPairInfo: {

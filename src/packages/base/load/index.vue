@@ -1,7 +1,7 @@
 <template>
     <div class="jiazai">
         <span>
-            <img src="https://beta.lyra.site/assets/images/loading_apng.png" alt="">
+            <img src="https://images.lyra.site/loading_apng.png" alt="">
         </span>
         <p>加载中</p>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="no-data">
-        <img src="https://beta.lyra.site/assets/images/nodata.png" alt="">
+        <img src="https://images.lyra.site/nodata.png" alt="">
         <p>暂无数据</p>
     </div>
 </template>

@@ -155,8 +155,7 @@
                 <div class="container2-main" >
                     <div class="container2-main-head">
                         <img @click="mnemonicTip(false)" src="https://images.lyra.site/clos.svg" alt="">
-                        <!-- <span class="iconfont" @click="mnemonicTip(false)">&#xe608;</span> -->
-                        </div>
+                    </div>
                     <div class="container2-main-col1">
                         <div>
                             <img v-if="waringFlag" src="https://images.lyra.site/waring.png" />
@@ -254,7 +253,6 @@ export default {
     },
     methods: {
         init(){
-            // xtar.trade();
             this.setPasswordColor();
         },
         //切换解锁方式

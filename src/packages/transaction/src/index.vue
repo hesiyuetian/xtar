@@ -108,13 +108,13 @@
                         交易额 = <span>{{(sellPrice && sellNum) ? toBigsells([sellNum,sellPrice],nowPairInfo.price_precision || 0) : '0'}} {{nowPairInfo.pair && nowPairInfo.pair.split('_')[1]}}</span>
                     </div>
                 </div>
-                
 
                 <div class='sell-buy-left-con-item-btn sell-btn noselect' v-if="token()" @click='sell()'> 卖出 {{nowPairInfo.pair && nowPairInfo.pair.split('_')[0]}}</div>
                 <div class='sell-buy-left-con-item-btn login sell-btn noselect' v-if="!token()" @click='login(true)'>登录</div>
             </div>
 
         </div>
+        <xtar-pwd v-if="dialogPwd" :config='config'></xtar-pwd>
         <xtar-unlock v-if='unlockFlag' @close='login'></xtar-unlock>
     </div>
 </template>
@@ -127,6 +127,7 @@ import regular from "../../../utils/regular";
 import { User } from "../../../utils/user";
 import load from "../../../utils/loading";
 import reset from "../../../utils/resetData";
+import xtarSign from "../../../utils/xtarSign";
 import { CONFIG } from '../../../utils/config'
 export default {
     name: "XtarTransaction",
@@ -158,7 +159,11 @@ export default {
             quoteBalance: '',
             
             // 当交易对下架或者不存在
-            defaultPair: ''
+            defaultPair: '',
+            
+            // 密码确认
+            dialogPwd: false,
+            config: {}
         }
     },
     props: {
@@ -171,22 +176,16 @@ export default {
     watch: {
         nowPairInfo(now, pre){
             if(now.pair){
-                console.log('change:---change')
                 this.buyPrice = this.sellPrice = now.close
                 this.init()
             }
         }
     },
     mounted() {
-        
     },
     methods: {
         init(){
             Promise.all([this.token() && this.throttle(), this.resetTrad(),this.token() && this.getBalanceToken()]) ;
-        },
-
-        alert(config){
-            this.dialog.createFromComponent(ConterAlertComponent,config)
         },
 
         //  初始化
@@ -270,17 +269,12 @@ export default {
 
         // 买入
         buy() {
-            if(!this.buyPrice){
-                return load.tipErrorShow(this.translate.instant('common.noPrice'))
-            }else if(this.buyPrice == 0 ){
-                return load.tipErrorShow(this.translate.instant('common.noTradBuy'))
-            }else if(!this.buyNum){
-                return load.tipErrorShow(this.translate.instant('common.noAmount'))
-            }else if(Number(this.buyNum) < Number(this.nowPairInfo.min_amount) ){
-                return this.buyTipFlag = true
-            }else{
-                this.buyTipFlag = false
-            }
+            if(!this.token()) return load.tipErrorShow('你的登录信息失效,请重新登录')
+            if(!this.buyPrice) return load.tipErrorShow('请输入单价')
+            else if(this.buyPrice == 0 ) return load.tipErrorShow('买入的单价应大于0')
+            else if(!this.buyNum) return load.tipErrorShow('请输入数量')
+            else if(Number(this.buyNum) < Number(this.nowPairInfo.min_amount) ) return this.buyTipFlag = true
+            else this.buyTipFlag = false
             
             let params = {
                 side: 'buy',   //  买卖方向 0-买；1-卖 ,
@@ -292,36 +286,22 @@ export default {
             }
 
             this.buyNum = null;
-            // if(Number(regular.toBigsells([params.amount,this.buyPrice],8)) <= Number(this.baseBalance)){
             if(regular.comparedTo(regular.toBigsells([params.amount,this.buyPrice],8), this.baseBalance) != 1){
-            // if(regular.toBigsells([params.amount,this.buyPrice],8) <= this.baseBalance){
                 this.trade(params)
             }else{
-                const config = {
-                    tip: this.translate.instant('common.noBlance'),
-                    ok: this.translate.instant('common.deposit'),
-                    callbackSure: ()=>{
-                        this.router.navigateByUrl('/assets_records')
-                    },
-                    callbackCancel: ()=>{ },
-                }
-                this.alert(config);
+                load.tipErrorShow('您的账户可用余额不足')
             }
         },
 
         // 卖出
         sell() {
-            if(!this.sellPrice){
-                return load.tipErrorShow(this.translate.instant('common.noPrice'))
-            }else if(this.sellPrice == 0){
-                return load.tipErrorShow(this.translate.instant('common.noTradSell'))
-            }else if(!this.sellNum){
-                return load.tipErrorShow(this.translate.instant('common.noAmount'))
-            }else if(Number(this.sellNum) < Number(this.nowPairInfo.min_amount)){
-                return this.sellTipFlag = true
-            }else{
-                this.sellTipFlag = false
-            }
+            if(!this.token()) return load.tipErrorShow('你的登录信息失效,请重新登录')
+            if(!this.sellPrice) return load.tipErrorShow('请输入单价')
+            else if(this.sellPrice == 0) return load.tipErrorShow('卖出的单价应大于0') 
+            else if(!this.sellNum) return load.tipErrorShow('请输入数量')
+            else if(Number(this.sellNum) < Number(this.nowPairInfo.min_amount)) return this.sellTipFlag = true
+            else this.sellTipFlag = false
+            
             let params = { 
                 side: 'sell',   //  买卖方向 0-买；1-卖 ,
                 salt: new Date().getTime().toString(),   // 时间戳 
@@ -332,19 +312,10 @@ export default {
             }
 
             this.sellNum = null;
-            // if(Number(params.amount) <= Number(this.quoteBalance)){
             if(regular.comparedTo(params.amount,this.quoteBalance) != 1){
                 this.trade(params)
             }else{
-                const config = {
-                    tip: this.translate.instant('common.noBlance'),
-                    ok: this.translate.instant('common.deposit'),
-                    callbackSure: ()=>{
-                        this.router.navigateByUrl('/assets_records')
-                    },
-                    callbackCancel: ()=>{ },
-                }
-                this.alert(config);
+                load.tipErrorShow('您的账户可用余额不足')
             }
         },
         // 委托下单
@@ -352,11 +323,8 @@ export default {
             const success = data => {
                 load.hide();
                 if(data.status === 0){
-                    this.dialog.destroy();
                     this.getBalanceToken();
-                    load.tipSuccessShow(this.translate.instant('common.tradeSuccess'));
-                    // this.scoket.setTrad('ing');
-                    
+                    load.tipSuccessShow('委托成功');
                 }else{
                     load.tipErrorShow(data.msg);
                 }
@@ -369,22 +337,25 @@ export default {
 
             const depoSig = (res) => {
                 load.loadingShow();
-                params.sig = this.auxBXA.orderSign(params,res);
-                params.sig && ( this.dialog.destroy(), service.create(params).then( res => { success(res) }) )
+                params.sig = xtarSign.orderSign(params,res);
+                params.sig && ( this.dialogPwd = false, service.create(params).then( res => { success(res) }) )
             }
             this.regularPwd(depoSig);
         },
 
         // 交易确认密码
         regularPwd(FN){
-            const time = this.auxBXA.isExpirTime();
+            const time = xtarSign.isExpirTime();
             if(time){
-                let option = {
-                    callback: res => {
+                this.config = {
+                    callbackSure: res => {
                         FN(res);
+                    },
+                    callbackCancel: () => {
+                        this.dialogPwd = false;
                     }
                 }
-                this.dialog.createFromComponent(DialogPwdComponent,option);
+                this.dialogPwd = true
             }else FN();
                 
         },
@@ -397,7 +368,12 @@ export default {
         throttle(action){
             clearInterval(this.timer);
             this.timer = setInterval(()=>{
-                if(!this.token()) return clearInterval(this.timer);
+                if(!this.token()) {
+                    clearInterval(this.timer);
+                    this.pubSub.resetData();
+                    this.quoteBalance = this.baseBalance = 0;
+                    return
+                }
                 this.getBalanceToken();
             },6000)
         },

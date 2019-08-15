@@ -9,9 +9,9 @@
 
             <template v-if='!isNewTrade'>
                 <header class='head'> 
-                    <span class='head-type' :class="{'acts': tradType == 'all'}" @click='changeTradType("all")'> <img src="https://beta.lyra.site/assets/images/all.svg" alt=""> </span>
-                    <span class='head-type' :class="{'acts': tradType == 'sell'}" @click='changeTradType("sell")'> <img src="https://beta.lyra.site/assets/images/sell.svg" alt=""> </span>
-                    <span class='head-type' :class="{'acts': tradType == 'buy'}" @click='changeTradType("buy")'> <img src="https://beta.lyra.site/assets/images/buy.svg" alt=""> </span>
+                    <span class='head-type' :class="{'acts': tradType == 'all'}" @click='changeTradType("all")'> <img src="https://images.lyra.site/all.svg" alt=""> </span>
+                    <span class='head-type' :class="{'acts': tradType == 'sell'}" @click='changeTradType("sell")'> <img src="https://images.lyra.site/sell.svg" alt=""> </span>
+                    <span class='head-type' :class="{'acts': tradType == 'buy'}" @click='changeTradType("buy")'> <img src="https://images.lyra.site/buy.svg" alt=""> </span>
 
                     <span class='head-item head-shen f-fr f-cursor' ref='xtarDepthSel' tabIndex="22" @blur='sleDepthFlag = false' @focus='sleDepth()'>
                         <span class='head-item-selDepth'>
