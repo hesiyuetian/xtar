@@ -67,8 +67,11 @@ import { depthUtil } from "./depth";
 import { CONFIG } from '../../../utils/config';
 import { watchPubSub } from "../../../watch/index";
 import * as echarts from "echarts";
-import Datafeeds from '../../../lib/trading/datafeed/udf/datafeed';
-import TradingView from '../../../lib/trading/charting_library.min.js';
+// import Datafeeds from '../../../../assets/trading/datafeed/udf/datafeed';
+// import TradingView from '../../../../assets/trading/charting_library.min.js';
+
+import Datafeeds from '../../../../static/trading/datafeed/udf/datafeed';
+import TradingView from '../../../../static/trading/charting_library.min.js';
 
 export default {
     name: "XtarKLine",
@@ -119,6 +122,11 @@ export default {
     watch: {
         nowPairInfo(now, pre){
             if(now.pair) this.init()
+        }
+    },
+    props: {
+        src: {
+            type: String,
         }
     },
     mounted() {
@@ -234,7 +242,9 @@ export default {
                 
                 container_id: "k-line",
                 datafeed: new Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,30000),
-                library_path: "src/lib/trading/",
+                // library_path: "static/trading/",
+                // library_path: "https://images.lyra.site/static/trading/",
+                library_path: this.src,
                 locale: User.getItem('language') || "zh", // en
                 // 不显示元素
                 disabled_features: tv.getDisFeatures(),
@@ -259,6 +269,12 @@ export default {
                 allow_symbol_change: true,
                 
             });
+            // setTimeout(()=>{
+            //     let parentDomain = window.location.hostname;
+            //     console.log("domain",parentDomain); //localhost
+            //     document.domain = 'images.lyra.site';
+            // },1000)
+            
 
             var chartType = 1;
             this.widget.onChartReady(() => {

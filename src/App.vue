@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div class='kline'>
-      <xtar-k-line></xtar-k-line>
+      <xtar-k-line :src='src'></xtar-k-line>
     </div>
     
-    <div class='symbole'>
+    <!-- <div class='symbole'>
       <xtar-market></xtar-market>
     </div>
     
@@ -19,7 +19,7 @@
     </div>
     <div class='orderlist'>
       <xtar-order-list></xtar-order-list>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       msg: false,
-      mode: true
+      mode: true,
+      src: 'static/trading/'
     };
   },
   created() {
