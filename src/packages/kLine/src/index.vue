@@ -70,8 +70,8 @@ import * as echarts from "echarts";
 // import Datafeeds from '../../../../assets/trading/datafeed/udf/datafeed';
 // import TradingView from '../../../../assets/trading/charting_library.min.js';
 
-import Datafeeds from '../../../../static/trading/datafeed/udf/datafeed';
-import TradingView from '../../../../static/trading/charting_library.min.js';
+// import Datafeeds from '../../../../static/trading/datafeed/udf/datafeed';
+// import TradingView from '../../../../static/trading/charting_library.min.js';
 
 export default {
     name: "XtarKLine",
@@ -127,7 +127,9 @@ export default {
     props: {
         src: {
             type: String,
-        }
+        },
+        tradingView: null,
+        datafeeds: null
     },
     mounted() {
         watchPubSub.scoket( res => {
@@ -227,7 +229,7 @@ export default {
         //初始化K线图
         initKLine() {
             let self = this;
-            var widget = this.widget = new TradingView.widget({
+            var widget = this.widget = new window.TradingView.widget({
                 fullscreen: false,
                 theme: 'Dark',
                 style: 3,
@@ -241,10 +243,10 @@ export default {
                 timeframe: this.cycle,
                 
                 container_id: "k-line",
-                datafeed: new Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,30000),
-                // library_path: "static/trading/",
-                // library_path: "https://images.lyra.site/static/trading/",
+                datafeed: new window.Datafeeds.UDFCompatibleDatafeed(`${CONFIG.apiUrl}/v1/market`,3000000000),
                 library_path: this.src,
+                // library_path: "https://images.lyra.site/static/trading/",
+                // library_path: this.src,
                 locale: User.getItem('language') || "zh", // en
                 // 不显示元素
                 disabled_features: tv.getDisFeatures(),

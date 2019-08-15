@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class='kline'>
-      <xtar-k-line :src='src'></xtar-k-line>
+      <xtar-k-line :src='src' :tradingView='tradingView' :datafeeds='datafeeds'></xtar-k-line>
     </div>
     
     <!-- <div class='symbole'>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+// declare var TradingView;
+// declare var Datafeeds;
 import load from './utils/loading'
 load.reset();
 export default {
@@ -33,7 +35,9 @@ export default {
     return {
       msg: false,
       mode: true,
-      src: 'static/trading/'
+      src: 'static/trading/',
+      tradingView: window.TtradingView,
+      datafeeds: window.Datafeeds
     };
   },
   created() {
