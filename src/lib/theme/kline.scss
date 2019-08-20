@@ -6,6 +6,7 @@ $sell_color : #FF6F79;
 .trad-content{
     width: 100%;
     height: 100%;
+    overflow: hidden;
     font-size: 12px;
     .blue{
         color: $buy_color;

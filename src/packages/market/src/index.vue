@@ -102,7 +102,7 @@
                   class="change"
                   :class="{'up-color': i.change > 0, 'down-color': i.change < 0, 'normal-color': i.change == 0}"
                 >
-                {{toFixed(i.change*100 || 0, 2)}}%
+                {{toFixed(i.change*100 || 0, 2) | sliceChange}}%
                 </div>
               </div>
             </div>

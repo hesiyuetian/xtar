@@ -13,7 +13,7 @@
             </div>
 
             <div class='trad-content-con'>
-                <div class='kline' v-if="chartShow == 'k'">
+                <div class='kline' v-show="chartShow === 'k'">
                     <div class='trad-content-left-now qcfd'>
                             <div class='f-fl trad-content-left-now-left'>
                                 <p class='trad-content-left-now-left-price f-opacity'>{{toFixed(nowPairInfo.close || 0 , nowPairInfo.price_precision)}}</p>
@@ -21,7 +21,7 @@
                             <div class='f-fl trad-content-left-now-right'>
                                 <div class='trad-content-left-now-right-item'>
                                     <p class='f-opacity-t'>涨幅</p>
-                                    <p class='f-opacity' :class="{'blue': nowPairInfo.change > 0, 'red': nowPairInfo.change < 0}">{{toFixed(nowPairInfo.change*100 || 0,2)}}%</p>
+                                    <p class='f-opacity' :class="{'blue': nowPairInfo.change > 0, 'red': nowPairInfo.change < 0}">{{toFixed(nowPairInfo.change*100 || 0,2) | sliceChange}}%</p>
                                 </div>
                 
                                 <div class='trad-content-left-now-right-item'>
@@ -202,8 +202,7 @@ export default {
         changeChart(val) {
             this.chartShow = val;
             setTimeout(_ => {
-                if (val == 'k') this.initKLine();
-                else this.depth.resize(), this.getDepth();
+                if (val == 'D') this.depth.resize(), this.getDepth();
             }, 500)
         },
 

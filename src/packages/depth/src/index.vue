@@ -64,7 +64,7 @@
 
                     <div class='sell-buy-center-con-tip qcfd border-box' :class="{'blue': nowPairInfo.change >= 0, 'red': nowPairInfo.change < 0}">
                         <span class='f-fl'>{{toFixed(nowPairInfo.close || 0, nowPairInfo.price_precision)}}</span>
-                        <span class='f-fr'>{{toFixed(nowPairInfo.change*100 || 0,2)}}%</span>
+                        <span class='f-fr'>{{toFixed(nowPairInfo.change*100 || 0,2) | sliceChange}}%</span>
                     </div>
 
                     <div class='sell-buy-center-con-buy'>

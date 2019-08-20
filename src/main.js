@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './lib/theme/reset.css'
+import './lib/theme/icon/index.css'
 import './lib/theme/loading.css'
 
 // base

@@ -8,9 +8,11 @@ function WS(){
     this.disLinkNumber = 0;
     this.symbol = 0;
     this.isClientSocket = true;
+    this.addEventSocketFlag = true;
 
     this.onCenten = symbol => {
         this.disLinkNumber = 0;
+        this.addEventSocketFlag = true;
         let url = CONFIG.wsUrl;
         if(this.isClientSocket){
             this.isClientSocket = false;
@@ -30,10 +32,10 @@ function WS(){
             this.emitPair(symbol)
         }
         this.wsReceiveSocket();
+        this.addEventSocket();
     }
 
-    this.addEventSocket = isCallWXConnect =>{
-        
+    this.addEventSocket = () => {
         if(this.socket){
             this.socket.on('connect_timeout', function(data){
                 console.log('链接超时 - connect_timeout');
@@ -41,7 +43,7 @@ function WS(){
 
             this.socket.on('disconnect', (res) => {
                 console.log('链接断开 - disconnect')
-                if(this.disLinkNumber <= 10 && isCallWXConnect){
+                if(this.disLinkNumber <= 10 && this.addEventSocketFlag){
                     setTimeout(()=>{
                         this.socket.on('reconnect',() => {
 
@@ -92,6 +94,7 @@ function WS(){
 
     this.wsCloseSocket = () => {
         if(this.socket){
+            this.addEventSocketFlag = false;
             this.socket.emit('unsubscribe',{"pair": this.symbol},(data)=>{
                 // this.socket.close();
                 // clearInterval(this.timers);

@@ -124,6 +124,12 @@ const getPrecision = {
             else if (status === 2) return y + '-' + month + '-' + d + ' ' + h + ':' + m
             else if (status === 3) return y + '-' + month + '-' + d + ' ' + h + ':' + m + ':' + s
             else if (status === 4) return y + '-' + month + '-' + d
+        },
+
+        // slice change
+        sliceChange(val){
+            if(regular.comparedTo(val, 10**8) == 1) return val.substr(0, 7)
+            else  return val
         }
     },
     methods: {
